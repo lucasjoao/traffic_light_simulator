@@ -1,43 +1,69 @@
-DICAS E COMENTÁRIOS DO PROF JEAN ACERCA DO TRABALHO DE SEMÁFORO
+__to-do__
+- o que diabos é trabalhoI?
+1. Criar esqueleto de todo código
+2. escrever código
+3. fazer código funcionar e tirar memory leaks
+4. documentar
+5. apresentação
 
-Pista:    Fila<Carro>
-Semáforo: ListaCirc<Semaforo>
-Relogio:  ListaOrdenada<Eventos>
+__definições__
+Objetos
+    - Pista:
+        - fila de vetor
+        - elemento: carros
+        - atributos:
+            - velocidade
+            - tamanho
+            - uma lista das filas de saída _(??? lista de vetor ???)_
+            - espaço
+            - randomizar para qual fila de saída o carro deve ir
+    - Semáforo:
+        - lista circular simples
+        - elemento: semáforos
+        - atributos:
+            - lista das filas _(??? lista de vetor ???)_ que a compõem
+            - lista de probabilidade _(???)_ que é associada com os elementos eferentes da lista das filas
+    - Relogio do sistema
+        - lista ordenada _(??? duplamente encadeada ou a simples ???)_
+        - elemento: momento (hora) de ocorrência do evento
+        - atributos:
+            - lista _(??? lista de vetor ???)_ dos eventos
+            - ___(??? precisa possuir uma lista dos semáforos e da pista ???)__
+    - Carros:
+        - tamanho = random(2 a 6) + 3
+Entradas
+    - tempo de abertura do sinal
+    - tempo de execução da simulação
+saída
+    - quantidade de carros que entrou
+    - quantidade de carros que saiu
 
-Tempo discreto - não precisa contar segundo a segundo...
-Um evento gera outros eventos...
-Quando se inicializa o sistema cria pistas e etc...é possível em cada uma das pistas criar o primeiro carro...
-Cada pista gera carros randomicamente a cada x segundos...
-Cada pista tem tamanho e velocidade, por isso é possivel saber quanto tempo "x" depois carro vai chegar no semaforo....
-Por isso dá para saber que no tempo "f(x)" ja tem um evento chamado "chegou" no semaforo...
-Digamos que o carro chegou no semaforo no tempo 40, e o semaforo só se abre no 60... entao apaga-se o evento 
-do 40, e cria-se evento 60. E passa a processar outros dados/pistas.
-Após processar a criação do primeiro carro, processa a proxima criação de carro desta pista e a chegada... e passa 
-para outra pista.
-Criar classe Evento, e especializa ela em cada um dos eventos variados.
-Técnicamente, ao chegarem 2 carros no tempo de espera do semaforo, passa-se os dois juntos(um em cima do outr), no mesmo tempo x, chegando ao mesmo tempo na outra pista(pista destino).
-O principal problema da forma como encontra-se descrito o problema, gerará congestionamento, momentos de fluxo bloqueado. Se
-não gerar isso está errado. Ele pedirá que forcemos tal situação. 
-Como conectar uma pista em outra pista: Ao chegar no fim da pista como saber qual pista x carro tem q ir ?
-Ter dentro de uma pista um vetor de pista pointer (Pista* Saidas[]), conectando assim uma pista na outra.
-     |    |    |   |
-_____|    |____|   |_______ Exemplo de pista...
-
-----|   |------|   |-------
-    |   |      |   |        
+__algumas observações__
+Tempo discreto -> não precisa contar segundo a segundo.
 
 Como o sistema  é baseado em eventos, não interessa a velocidade, e sim o tempo.
-Após a pista começa a rodar, não interessa mais o tamanho dela, e sim o TAMANHO LIVRE!
-Ao adicionar carro, decrementa o tamanho livre da pista, se não houver espaço para o carro
-a entrar não se chama o metodo adiciona carro. Ao tirar um carro da pista, também necessita-se
-incrementar o espaço livre. Ou seja o adiciona na pista e o retira da pista, é  semelhando ao
-adiciona e retira da fila, porém com verificação de espaço livre.
+- Após a pista começa a rodar, não interessa mais o tamanho dela, e sim o TAMANHO LIVRE!
+- Ao adicionar carro, decrementa o tamanho livre da pista, se não houver espaço para o carro a entrar não se chama o metodo adiciona carro. Ao tirar um carro da pista, também necessita-se
+incrementar o espaço livre.
+
 Elimina da pista, para tirar os carros do sumidouro, tirar da memoria.
 
-Dica: Pensar bastante antes de começar a programar. Bem mais fácil do que sentar e começar a programar.
-Trabalho em dupla, mas a apresentação é praticamente individual, perguntas individuais também, necessário
-conhecer todo o código.
-Semáforo marcado = Não é possível fazer ninguem cruzar.
+Semáforo marcado, então não é possível fazer ninguem cruzar.
+
+Semáforo abre no sentido horário, só há opção de verde e vermelho.
+
+Haverá um momento em que todos os sinais estarão em vermelho.
+
+Semáforo de quatro tempos
+
+Carro não possui aceleração e trafega na velocidade da velocidade
+
+Fila está ligada em um semáforo que a liga em outra fila
+
+
+
+
+
 
 
 
