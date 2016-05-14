@@ -1,9 +1,8 @@
 __to-do__
-1. Criar esqueleto de todo código
-2. escrever código
-3. fazer código funcionar e tirar memory leaks
-4. documentar
-5. apresentação
+1. escrever código
+2. fazer código funcionar bem e tirar memory leaks
+3. documentar
+4. apresentação
 
 __definições__
 Objetos
