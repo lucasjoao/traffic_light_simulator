@@ -1,3 +1,5 @@
+#ifndef LISTAENC_HPP
+#define LISTAENC_HPP
 /**
  *  Copyright [2016] - Lucas Joao Martins
  *  ListaEnc.hpp
@@ -453,3 +455,4 @@ class ListaEnc {
 		Elemento<T> *head;  //!< objeto cabeca da lista, ocupa a primeira pos
 		int size;			//!< indica o atual tamanho da lista
 };
+#endif

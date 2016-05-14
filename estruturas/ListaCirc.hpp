@@ -1,3 +1,5 @@
+#ifndef LISTACIRC_HPP
+#define LISTACIRC_HPP
 /*!
  *  \brief ListaCirc.hpp
  *	\copyright Copyright [2016], Lucas Joao Martins
@@ -500,3 +502,4 @@ class ListaCirc {
 		Elemento<T> *sentinel;  //!< objeto sentinela da lista
 		int size;				//!< indica o atual tamanho da lista
 };
+#endif

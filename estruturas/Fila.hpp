@@ -1,3 +1,6 @@
+#ifndef FILA_HPP
+#define FILA_HPP
+
 /**
  *  Copyright [2016] - Lucas João Martins
  *  Fila.hpp
@@ -139,3 +142,4 @@ class Fila {
 			numeroUltimo = -1;
 		}
 };
+#endif

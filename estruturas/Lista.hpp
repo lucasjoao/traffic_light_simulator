@@ -1,3 +1,6 @@
+#ifndef LISTA_HPP
+#define LISTA_HPP
+
 /**
  *  Copyright [2016] - Lucas Joao Martins
  *  Lista.hpp
@@ -366,3 +369,4 @@ class Lista {
 			ultimo = -1;
 		}
 };
+#endif
