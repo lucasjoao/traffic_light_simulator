@@ -1,5 +1,4 @@
 __to-do__
-- o que diabos é trabalhoI?
 1. Criar esqueleto de todo código
 2. escrever código
 3. fazer código funcionar e tirar memory leaks
@@ -8,29 +7,37 @@ __to-do__
 
 __definições__
 Objetos
-    - Pista:
+    - Pista (l):
         - fila de vetor
         - elemento: carros
         - atributos:
             - velocidade
+            - uma lista das filas de saída lista de vetor
             - tamanho
-            - uma lista das filas de saída _(??? lista de vetor ???)_
-            - espaço
+            - espaço livre
             - randomizar para qual fila de saída o carro deve ir
-    - Semáforo:
+    - Cruzamento (l):
         - lista circular simples
         - elemento: semáforos
         - atributos:
-            - lista das filas _(??? lista de vetor ???)_ que a compõem
+            - lista das filas lista de vetor que a compõem
             - lista de probabilidade _(???)_ que é associada com os elementos eferentes da lista das filas
-    - Relogio do sistema
-        - lista ordenada _(??? duplamente encadeada ou a simples ???)_
-        - elemento: momento (hora) de ocorrência do evento
+    - Relogio do sistema (l):
+        - lista ordenada (lista encadeada simples)
+        - elemento: eventos
         - atributos:
-            - lista _(??? lista de vetor ???)_ dos eventos
-            - ___(??? precisa possuir uma lista dos semáforos e da pista ???)__
-    - Carros:
-        - tamanho = random(2 a 6) + 3
+            - _(??? precisa possuir uma lista dos semáforos e da pista ???)_
+    - Carros (w):
+        - atributos
+            - tamanho = random(2 a 6) + 3
+    - Semáforo (w):
+        - atributos
+            - status (aberto/fechado)
+            - tempo para abrir
+    - Evento (w):
+        - atributos
+            - tempo para ser executado
+            - _(??? var que diz qual tipo de evento é ???)_
 Entradas
     - tempo de abertura do sinal
     - tempo de execução da simulação
