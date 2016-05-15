@@ -5,7 +5,7 @@
 #include "estruturas/Lista.hpp"
 #include "Semaforo.hpp"
 
-class Cruzamento : ListaCirc<Semaforo> {
+class Cruzamento : ListaCirc<Semaforo*> {
 	public:
 		Cruzamento() {}
 
@@ -13,6 +13,6 @@ class Cruzamento : ListaCirc<Semaforo> {
 
 		}
 	private:
-		Lista *pistas;
+		// Lista *pistas;
 };
 #endif

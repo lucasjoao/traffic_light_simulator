@@ -13,7 +13,8 @@ int main() {
 	std::cout << "Insira o tempo, em segundos, que o semáforo fica aberto: \n" 		 << "> ";
 	std::cin >> tempoSemaforo;
 
-	Regente regente = new Regente(tempoExecucao, tempoSemaforo);
+	Regente *regente = new Regente(tempoExecucao, tempoSemaforo);
+	regente->start();
 	// aqui deve-se instanciar o regente, chamar métodos que calculam os eventos, metodo que executa todos os eventos e finalizar execução com print do resultado final
 
 	return 0;
