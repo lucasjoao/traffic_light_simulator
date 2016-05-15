@@ -4,7 +4,7 @@
 class Regente {
 	public:
 	private:
-		List
+		// adicionar estruturas
 };
 
 #endif

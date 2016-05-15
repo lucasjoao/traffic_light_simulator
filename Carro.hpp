@@ -2,8 +2,6 @@
 #define CARRO_HPP
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
 
 class Carro {
     private:
@@ -22,8 +20,6 @@ class Carro {
 
         int calculaTam() {
             int x = 0;
-            srand((unsigned)time(NULL));  // inicializando a semente de numero
-            //randomico neste caso pegando um tempo diferente
             x = 2 + (rand()%5); // para que x receba um valor de 2 a 6(0-1-2-3-4-5);
             return x;
         }
