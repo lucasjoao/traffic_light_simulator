@@ -6,6 +6,7 @@
 
 class Relogio : ListaEnc<Evento> {
 	public:
+		Relogio() {}
 	private:
 };
 

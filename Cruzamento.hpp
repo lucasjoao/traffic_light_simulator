@@ -7,6 +7,11 @@
 
 class Cruzamento : ListaCirc<Semaforo> {
 	public:
+		Cruzamento() {}
+
+		int proximoEvento() {
+
+		}
 	private:
 		Lista *pistas;
 };
