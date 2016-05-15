@@ -1,3 +1,6 @@
+#ifndef SEMAFORO_HPP
+#define SEMAFORO_HPP
+
 class Semaforo {
 	private:
 		bool status;
@@ -18,3 +21,4 @@ class Semaforo {
 			return timeOpenned();
 		}
 };
+#endif

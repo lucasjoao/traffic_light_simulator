@@ -1,3 +1,6 @@
+#ifndef EVENTO_HPP
+#define EVENTO_HPP
+
 class Evento {
     private:
         int tempo;
@@ -17,3 +20,4 @@ class Evento {
             return tempo;
         }
 };
+#endif

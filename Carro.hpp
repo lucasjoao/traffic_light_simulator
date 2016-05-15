@@ -1,3 +1,6 @@
+#ifndef CARRO_HPP
+#define CARRO_HPP
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -38,3 +41,4 @@ class Carro {
             return chanceDeVirar;
         }
 };
+#endif
