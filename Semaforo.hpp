@@ -1,20 +1,20 @@
- class Semaforo {
-  private:
-   bool status;
-   int timeToOpen;
-   int timeOpenned;
-  
-  public:
-  	Semaforo(bool status, int tempo) {
-  		status = status;
-  		tempo = tempo
-  	}
+class Semaforo {
+	private:
+		bool status;
+		int timeToOpen;
+		int timeOpenned;
 
-  	int getTimeToOpen () {
-  		return timeToOpen();
-  	}
+	public:
+		Semaforo(bool status, int tempo) {
+			status = status;
+			tempo = tempo
+		}
 
-  	int getTimeOpenned () {
-  		return timeOpenned();
-  	}
- }
+		int getTimeToOpen () {
+			return timeToOpen();
+		}
+
+		int getTimeOpenned () {
+			return timeOpenned();
+		}
+};

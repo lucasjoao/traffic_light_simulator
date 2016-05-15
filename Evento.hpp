@@ -1,20 +1,19 @@
 class Evento {
     private:
-     int tempo;
-     var tipo;
-    
+        int tempo;
+        var tipo;
+
     public:
+        Evento(int time, var type) {
+            tempo = time;
+            tipo = type;
+        }
 
-      Evento( int time, var type) {
-        tempo = time;
-        tipo = type;
-      }
+        getTipo() {
+            return tipo;
+        }
 
-      getTipo() {
-        return tipo;
-      }
-
-      getTempo() {
-        return tempo;
-      }
-    }
+        getTempo() {
+            return tempo;
+        }
+};
