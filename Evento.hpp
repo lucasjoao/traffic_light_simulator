@@ -2,22 +2,22 @@
 #define EVENTO_HPP
 
 class Evento {
-    private:
-        int tempo;
-        var tipo;
-
     public:
-        Evento(int time, var type) {
+        Evento(int time, int type) {
             tempo = time;
             tipo = type;
         }
 
-        getTipo() {
+        int getTipo() {
             return tipo;
         }
 
-        getTempo() {
+        int getTempo() {
             return tempo;
         }
+
+    private:
+        int tempo;
+        int tipo;
 };
 #endif

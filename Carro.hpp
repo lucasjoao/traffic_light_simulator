@@ -1,13 +1,7 @@
 #ifndef CARRO_HPP
 #define CARRO_HPP
 
-#include <stdio.h>
-
 class Carro {
-    private:
-        int tamanho;
-        int chanceDeVirar;
-
     public:
         Carro() {
         	tamanho = calculaTam() + 3;//somando 3 que é distancia minima trás/frente
@@ -33,8 +27,12 @@ class Carro {
             return tamanho;
         }
 
-        int returnChanceDeVirar() {
+        int getChanceDeVirar() {
             return chanceDeVirar;
         }
+
+    private:
+        int tamanho;
+        int chanceDeVirar;
 };
 #endif
