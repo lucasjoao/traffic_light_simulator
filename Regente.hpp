@@ -120,6 +120,19 @@ class Regente {
 			}
 		}
 
+		void eventosAbrirSemaforo() {
+			Semaforo *semaforo;
+			Semaforo *proxSemaforo;
+			Evento *evento;
+			Evento *proxEvento;
+			int tempo;
+			for (int i = 0; i < cruzamentos->getMaxLista(); i++) {
+				for (int j = 0; j < cruzamentos->getDados(i)->getSize(); j++) {
+
+				}
+			}
+		}
+
 	private:
 		Lista<Pista*> *pistas;
 		Lista<Cruzamento*> *cruzamentos;

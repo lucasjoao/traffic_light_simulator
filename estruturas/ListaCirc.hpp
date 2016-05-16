@@ -497,6 +497,16 @@ class ListaCirc {
 			return dado1 < dado2;
 		}
 
+		/*!
+		 *  \brief Funcao getSize()
+		 *  \return inteiro que representa a variavel privada size
+		 *
+		 *  Funcao getter
+		 */
+		int getSize() {
+			return size;
+		}
+
 	private:
 		Elemento<T> *head;      //!< objeto cabeca da lista
 		Elemento<T> *sentinel;  //!< objeto sentinela da lista
