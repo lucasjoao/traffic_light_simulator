@@ -37,6 +37,10 @@ class Pista : Fila<Carro> {
 
 		}
 
+		bool getFonte() {
+			return fonte;
+		}
+
 	private:
 		int velocidade;
 		int tamanho;

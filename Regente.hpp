@@ -75,6 +75,46 @@ class Regente {
 			cruzamentos->adiciona(c2);
 		}
 
+	void eventosCarro() {
+			Pista* pAtual;
+    		int tIntern, tNextEvent;
+    		Evento* evento;
+			for(int i = 0; i < pistas->getTamanho(); i++) {
+				if (pistaAtual->getFonte() == true) {
+					tIntern = tAtual;
+					while(tIntern < tempoExecucao) {
+						tNextEvent = pistaAtual->proximoEvento(tIntern); //acabar implementação de proximo evento
+						if (tNextEvent < tempoExecucao)	{
+							evento = new Evento(tempoProximoEvento, 0); //parametros int tempo, e int tipo
+                    		eventos->adicionaEmOrdem(evento);
+							tIntern = tNextEvent;
+						} else {
+							break;
+						}
+
+					}
+				}
+			}
+		}
+
+		void eventosChegadaSemaforo() {
+			Pista* atual;
+			Semaforo* semaforo;
+			Evento* evento;
+			int tChegada, tNextEvent;
+			int tOriginal = eventos->getTamanho(); //não tenho certeza se pode acessar isso desse geito, acho que sim já que eventos é do tipo relógio e relógio tem uma lista de eventos
+			for (int pos = 0; pos < tOriginal; i++) {
+				if (eventos->retornaDado(pos)->getTipo() == 0) { //supondo que zero é o tipo que queremos
+					tChegada = eventos->retornaDado(pos)->getTempo();
+					//travei aqui
+					//estava tentando adaptar ao nosso até pq a partir daqui ele meche com semaforo
+					//e o semaforo dele tem mais atributos que o nosso, logo mais usos dai fiquei meio confuso, inclusive com aquele relacionado rs
+					//pretendo pegar novamente amanhã, para entender melhor e possívelmente implementar
+				}
+			}
+		}
+
+
 	private:
 		Lista<Pista*> *pistas;
 		Lista<Cruzamento*> *cruzamentos;
