@@ -13,7 +13,7 @@ class Regente {
 			tempoSemaforo = tS;
 			pistas = new Lista<Pista*>(14);
 			cruzamentos = new Lista<Cruzamento*>(2);
-			eventos = Relogio();
+			eventos = new Relogio();
 		}
 
 		void start() {
@@ -49,12 +49,36 @@ class Regente {
 			pistas->adiciona(new Pista(40, 500, 0, 0));
 			pistas->adiciona(new Pista(40, 500, 60, 15));
 
+			/* só de precisar de uma var com nome
+			 *
+			Semaforo *s1norte = new Semaforo(false, tempoSemaforo);
+			Semaforo *s2norte = new Semaforo(false, tempoSemaforo);
+			Semaforo *s1leste = new Semaforo(false, tempoSemaforo);
+			Semaforo *s2leste = new Semaforo(false, tempoSemaforo);
+			Semaforo *s1sul = new Semaforo(false, tempoSemaforo);
+			Semaforo *s2sul = new Semaforo(false, tempoSemaforo);
+			Semaforo *s1oeste = new Semaforo(false, tempoSemaforo);
+			Semaforo *s2oeste = new Semaforo(false, tempoSemaforo);*/
+
+			Cruzamento *c1 = new Cruzamento();
+			c1->adiciona(new Semaforo(false, tempoSemaforo));
+			c1->adiciona(new Semaforo(false, tempoSemaforo));
+			c1->adiciona(new Semaforo(false, tempoSemaforo));
+			c1->adiciona(new Semaforo(false, tempoSemaforo));
+			cruzamentos->adiciona(c1);
+
+			Cruzamento *c2 = new Cruzamento();
+			c2->adiciona(new Semaforo(false, tempoSemaforo));
+			c2->adiciona(new Semaforo(false, tempoSemaforo));
+			c2->adiciona(new Semaforo(false, tempoSemaforo));
+			c2->adiciona(new Semaforo(false, tempoSemaforo));
+			cruzamentos->adiciona(c2);
 		}
 
 	private:
 		Lista<Pista*> *pistas;
 		Lista<Cruzamento*> *cruzamentos;
-		Relogio eventos;
+		Relogio *eventos;
 		int tempoExecucao;
 		int tempoSemaforo;
 };

@@ -5,20 +5,20 @@ class Semaforo {
 	public:
 		Semaforo(bool status, int tempo) {
 			status = status;
-			tempo = tempo;
+			tempoAberto = tempo;
 		}
 
-		int getTimeToOpen() {
-			return timeToOpen;
+		int getTempoParaAbrir() {
+			return tempoParaAbrir;
 		}
 
-		int getTimeOpenned() {
-			return timeOpenned;
+		int getTempoAberto() {
+			return tempoAberto;
 		}
 
 	private:
 		bool status;
-		int timeToOpen;
-		int timeOpenned;
+		int tempoParaAbrir;
+		int tempoAberto;
 };
 #endif

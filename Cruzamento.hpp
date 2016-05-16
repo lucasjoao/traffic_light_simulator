@@ -9,6 +9,10 @@ class Cruzamento : ListaCirc<Semaforo*> {
 	public:
 		Cruzamento() {}
 
+		void adiciona(Semaforo *semaforo) {
+			ListaCirc<Semaforo*>::adiciona(semaforo);
+		}
+
 		int proximoEvento() {
 
 		}
