@@ -3,21 +3,21 @@
 
 class Evento {
     public:
-        Evento(int time, int type) {
-            tempo = time;
-            tipo = type;
+        Evento(int tempo, int tipo) {
+            _tempo = tempo;
+            _tipo = tipo;
         }
 
         int getTipo() {
-            return tipo;
+            return _tipo;
         }
 
         int getTempo() {
-            return tempo;
+            return _tempo;
         }
 
     private:
-        int tempo;
-        int tipo;
+        int _tempo;
+        int _tipo;
 };
 #endif

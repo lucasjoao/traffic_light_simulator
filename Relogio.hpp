@@ -4,9 +4,13 @@
 #include "estruturas/ListaEnc.hpp"
 #include "Evento.hpp"
 
-class Relogio : ListaEnc<Evento> {
+class Relogio : public ListaEnc<Evento*> {
 	public:
 		Relogio() {}
+
+		void adicionaEmOrdem(Evento *evento) {
+			ListaEnc<Evento*>::adicionaEmOrdem(evento);
+		}
 	private:
 };
 

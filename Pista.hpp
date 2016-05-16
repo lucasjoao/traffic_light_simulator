@@ -33,8 +33,10 @@ class Pista : Fila<Carro> {
 
 		}
 
-		int proximoEvento() {
-
+		int proximaCriacaoCarro(int tempo) {
+			int limiteInferior = frequencia - variacaoFrequencia;
+			int nroValores = 2 * variacaoFrequencia + 1;
+			return (limiteInferior + (rand() % nroValores)) + tempo;
 		}
 
 		bool getFonte() {

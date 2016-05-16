@@ -368,5 +368,25 @@ class Lista {
 		void destroiLista() {
 			ultimo = -1;
 		}
+
+		/*!
+		 *  \brief Funcao getMaxLista()
+		 *  \return inteiro que representa a variavel privada maxLista
+		 *
+		 *  Funcao getter
+		 */
+		int getMaxLista() {
+			return maxLista;
+		}
+
+		/*!
+		 *  \brief Funcao getDados()
+		 *  \return tipo generico que representa o vetor privado dados
+		 *
+		 *  Funcao getter
+		 */
+		T *getDados() {
+			return dados;
+		}
 };
 #endif

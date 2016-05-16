@@ -75,29 +75,35 @@ class Regente {
 			cruzamentos->adiciona(c2);
 		}
 
-	void eventosCarro() {
-			Pista* pAtual;
-    		int tIntern, tNextEvent;
-    		Evento* evento;
-			for(int i = 0; i < pistas->getTamanho(); i++) {
-				if (pistaAtual->getFonte() == true) {
-					tIntern = tAtual;
-					while(tIntern < tempoExecucao) {
-						tNextEvent = pistaAtual->proximoEvento(tIntern); //acabar implementação de proximo evento
-						if (tNextEvent < tempoExecucao)	{
-							evento = new Evento(tempoProximoEvento, 0); //parametros int tempo, e int tipo
-                    		eventos->adicionaEmOrdem(evento);
-							tIntern = tNextEvent;
-						} else {
-							break;
-						}
+		void eventosCriarCarro() {
+			Pista *pista;
+    		Evento *evento;
+    		int tempo;
+    		// int tempoEvento;
 
+			for(int i = 0; i < pistas->getMaxLista(); i++) {
+				pista = pistas->getDados()[i];
+				if (pista->getFonte()) {
+					tempo = 0;
+					while(tempo < tempoExecucao) {
+						/*tempoEvento = pista->proximaCriacaoCarro(tempo);
+						if (tempoEvento < tempoExecucao) {
+							evento = new Evento(tempoEvento, 0);
+                    		eventos->adicionaEmOrdem(evento);
+							tempo = tempoEvento;
+						}*/
+
+						tempo = pista->proximaCriacaoCarro(tempo);
+						if (tempo < tempoExecucao) {
+							evento = new Evento(tempo, 0);
+                    		eventos->adicionaEmOrdem(evento);
+						}
 					}
 				}
 			}
 		}
 
-		void eventosChegadaSemaforo() {
+		/*void eventosChegadaSemaforo() {
 			Pista* atual;
 			Semaforo* semaforo;
 			Evento* evento;
@@ -112,8 +118,7 @@ class Regente {
 					//pretendo pegar novamente amanhã, para entender melhor e possívelmente implementar
 				}
 			}
-		}
-
+		}*/
 
 	private:
 		Lista<Pista*> *pistas;

@@ -15,6 +15,7 @@ int main() {
 
 	Regente *regente = new Regente(tempoExecucao, tempoSemaforo);
 	regente->start();
+	regente->eventosCriarCarro();
 	// aqui deve-se instanciar o regente, chamar métodos que calculam os eventos, metodo que executa todos os eventos e finalizar execução com print do resultado final
 
 	return 0;
