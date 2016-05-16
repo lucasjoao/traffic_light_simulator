@@ -16,6 +16,10 @@ class Semaforo {
 			return tempoAberto;
 		}
 
+		int proximaTrocaSinal(int tempo) {
+			return tempo + tempoAberto;
+		}
+
 	private:
 		bool status;
 		int tempoParaAbrir;

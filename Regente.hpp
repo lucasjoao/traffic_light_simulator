@@ -120,15 +120,30 @@ class Regente {
 			}
 		}
 
-		void eventosAbrirSemaforo() {
+		void eventosMudancaSemaforo() {
 			Semaforo *semaforo;
 			Semaforo *proxSemaforo;
 			Evento *evento;
 			Evento *proxEvento;
+			Cruzamento *tmpCruzamento;
 			int tempo;
 			for (int i = 0; i < cruzamentos->getMaxLista(); i++) {
-				for (int j = 0; j < cruzamentos->getDados(i)->getSize(); j++) {
+				tmpCruzamento = cruzamentos->getDados()[i];
 
+				for (int j = 0; j < tmpCruzamento->getSize(); j++) {
+					tempo = 0;
+
+					while (tempo <= tempoExecucao) {
+						semaforo = (Semaforo *) tmpCruzamento->getSem(j);
+						proxSemaforo = (Semaforo *) tmpCruzamento->getSem(j+1);
+						tempo = semaforo->proximaTrocaSinal(tempo);
+						if (tempo <= tempoExecucao) {
+							evento = new Evento(tempo, 2, semaforo);
+							proxEvento = new Evento(tempo, 2, semaforo);
+							eventos->adicionaEmOrdem(evento);
+							eventos->adicionaEmOrdem(proxEvento);
+						}
+					}
 				}
 			}
 		}
