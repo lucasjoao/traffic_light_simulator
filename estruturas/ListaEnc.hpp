@@ -321,6 +321,30 @@ class ListaEnc {
 			}
 		}
 
+		/*!
+		 *  \brief Funcao mostra
+		 *	\param pos e o inteiro que indica a posicao que deve mostrar a
+		 *		info que ela possui.
+		 *	\return um tipo generico que representa o dado na posicao.
+		 *
+		 *  Se for uma posicao valida, entao caminha ate o vertice da posicao
+		 *		desejada com o auxilio de um ponteiro temporario e retorna a
+		 *		informacao que o elemento dessa posicao contem. Posicao deve
+		 *		ser menor que o tamanho da lista.
+		 */
+		T mostra(int pos) {
+			if (pos >= size) {
+				throw "problema";
+			} else {
+				Elemento<T> *tmpElemento = head;
+
+				while (pos-- != 0)
+					tmpElemento = tmpElemento->getProximo();
+
+				return tmpElemento->getInfo();
+			}
+		}
+
 		/**
 		 *  Funcao constante posicao
 		 *	Caminha por todos os vertices da estrutura e para cada um deles
@@ -449,6 +473,16 @@ class ListaEnc {
 		 */
 		bool menor(T dado1, T dado2) {
 			return dado1 < dado2;
+		}
+
+		/*!
+		 *  \brief Funcao getSize()
+		 *  \return inteiro que representa a variavel privada size
+		 *
+		 *  Funcao getter
+		 */
+		int getSize() {
+			return size;
 		}
 
 	private:

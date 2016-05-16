@@ -13,6 +13,8 @@ class Pista : Fila<Carro> {
 			frequencia = freq;
 			variacaoFrequencia = varFreq;
 
+			tempoPercorrer = tamanho / velocidade;
+
 			if (freq != 0) {
 				fonte = true;
 				sumidouro = false;
@@ -37,6 +39,10 @@ class Pista : Fila<Carro> {
 			int limiteInferior = frequencia - variacaoFrequencia;
 			int nroValores = 2 * variacaoFrequencia + 1;
 			return (limiteInferior + (rand() % nroValores)) + tempo;
+		}
+
+		int getTempoPercorrer() {
+			return tempoPercorrer;
 		}
 
 		bool getFonte() {

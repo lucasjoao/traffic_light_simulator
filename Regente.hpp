@@ -94,8 +94,8 @@ class Regente {
 						}*/
 
 						tempo = pista->proximaCriacaoCarro(tempo);
-						if (tempo < tempoExecucao) {
-							evento = new Evento(tempo, 0);
+						if (tempo <= tempoExecucao) {
+							evento = new Evento(tempo, 0, pista);
                     		eventos->adicionaEmOrdem(evento);
 						}
 					}
@@ -103,22 +103,22 @@ class Regente {
 			}
 		}
 
-		/*void eventosChegadaSemaforo() {
-			Pista* atual;
-			Semaforo* semaforo;
-			Evento* evento;
-			int tChegada, tNextEvent;
-			int tOriginal = eventos->getTamanho(); //não tenho certeza se pode acessar isso desse geito, acho que sim já que eventos é do tipo relógio e relógio tem uma lista de eventos
-			for (int pos = 0; pos < tOriginal; i++) {
-				if (eventos->retornaDado(pos)->getTipo() == 0) { //supondo que zero é o tipo que queremos
-					tChegada = eventos->retornaDado(pos)->getTempo();
-					//travei aqui
-					//estava tentando adaptar ao nosso até pq a partir daqui ele meche com semaforo
-					//e o semaforo dele tem mais atributos que o nosso, logo mais usos dai fiquei meio confuso, inclusive com aquele relacionado rs
-					//pretendo pegar novamente amanhã, para entender melhor e possívelmente implementar
+		void eventosChegadaSemaforo() {
+			Pista *pista;
+			Evento *evento;
+			int tempo;
+			for (int i = 0; i < eventos->getTamanho(); i++) {
+				if (eventos->getEvento(i).getTipo() == 0) {
+					tempo = eventos->getEvento(i).getTempo();
+					pista = (Pista *) eventos->getEvento(i).getElemento();
+					tempo += pista->getTempoPercorrer();
+					if (tempo <= tempoExecucao) {
+						evento = new Evento(tempo, 1, 0);
+						eventos->adicionaEmOrdem(evento);
+					}
 				}
 			}
-		}*/
+		}
 
 	private:
 		Lista<Pista*> *pistas;

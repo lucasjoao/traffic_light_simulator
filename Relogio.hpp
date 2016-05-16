@@ -11,7 +11,14 @@ class Relogio : public ListaEnc<Evento*> {
 		void adicionaEmOrdem(Evento *evento) {
 			ListaEnc<Evento*>::adicionaEmOrdem(evento);
 		}
-	private:
+
+		int getTamanho() {
+			ListaEnc<Evento*>::getSize();
+		}
+
+		Evento getEvento(int posicao) {
+			ListaEnc<Evento*>::mostra(posicao);
+		}
 };
 
 #endif
