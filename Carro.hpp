@@ -19,8 +19,9 @@ class Carro {
         }
 
         int calculaProbDeVirar() {
-            int x = (rand() % 100); //num randomico de 0 a  99
-            return x;
+            /*int x = (rand() % 100); //num randomico de 0 a  99
+            return x;*/
+            return (int) (rand() % 100);
         }
 
         int getTamanho() {

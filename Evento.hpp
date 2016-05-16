@@ -27,6 +27,7 @@ class Evento {
             // 0 = criar carro
             // 1 = carro chega semáforo
             // 2 = muda semáforo
+            // 3 = carro muda de pista
         void *_elemento;
 };
 #endif

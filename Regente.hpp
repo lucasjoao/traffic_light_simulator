@@ -120,6 +120,29 @@ class Regente {
 			}
 		}
 
+		void eventosCarroNoSemaforo(Evento *evento) {
+			/* Preciso:
+			 *		para qual pista o carro vai? relação probabilidade
+			 			fazer defineDestino
+			 *		adiciona o carro nessa pista e retira da velha - somente se for possível
+			 *		se o sinal está aberto e conseguiu mudar de pista, ele cria evento para o momento
+			 *			se a pista for sumidouro, cria evento de retirada do carro
+			 *			se a pista não for sumidouro, cria evento de chegada no semaforo
+			 *		se o sinal está aberto e não consegue mudar de pista, ele cria evento para daqui a um segundo
+			 *		se o sinal está fechado, ele cria evento para quando abrir
+			 */
+			 Semaforo *semaforo = (Semaforo *) evento->getElemento();
+			 int tempo = evento->getTempo();
+			 Pista *pistaDestino = semaforo->defineDestino();
+
+
+		}
+
+		/*
+		 * executa eventos
+		 * se for do tipo 1, só chama funcao carroNoSemaforo()
+		 */
+
 		void eventosMudancaSemaforo() {
 			Semaforo *semaforo;
 			Semaforo *proxSemaforo;
@@ -129,10 +152,8 @@ class Regente {
 			int tempo;
 			for (int i = 0; i < cruzamentos->getMaxLista(); i++) {
 				tmpCruzamento = cruzamentos->getDados()[i];
-
 				for (int j = 0; j < tmpCruzamento->getSize(); j++) {
 					tempo = 0;
-
 					while (tempo <= tempoExecucao) {
 						semaforo = (Semaforo *) tmpCruzamento->getSem(j);
 						proxSemaforo = (Semaforo *) tmpCruzamento->getSem(j+1);
