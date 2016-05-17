@@ -109,7 +109,8 @@ class Regente {
 			Pista *pista;
 			Evento *evento;
 			int tempo;
-			for (int i = 0; i < eventos->getTamanho(); i++) {
+			int nroEventos = eventos->getTamanho();
+			for (int i = 0; i < nroEventos; i++) {
 				if (eventos->getEvento(i)->getTipo() == 0) {
 					tempo = eventos->getEvento(i)->getTempo();
 					pista = (Pista *) eventos->getEvento(i)->getElemento();
