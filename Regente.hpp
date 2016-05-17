@@ -110,9 +110,9 @@ class Regente {
 			Evento *evento;
 			int tempo;
 			for (int i = 0; i < eventos->getTamanho(); i++) {
-				if (eventos->getEvento(i).getTipo() == 0) {
-					tempo = eventos->getEvento(i).getTempo();
-					pista = (Pista *) eventos->getEvento(i).getElemento();
+				if (eventos->getEvento(i)->getTipo() == 0) {
+					tempo = eventos->getEvento(i)->getTempo();
+					pista = (Pista *) eventos->getEvento(i)->getElemento();
 					tempo += pista->getTempoPercorrer();
 					if (tempo <= tempoExecucao) {
 						evento = new Evento(tempo, 1, 0);
@@ -122,10 +122,10 @@ class Regente {
 			}
 		}
 
-		void eventosCarroNoSemaforo(Evento tmpEvento) {
+		void eventosCarroNoSemaforo(Evento *tmpEvento) {
 			Evento *evento;
-			Semaforo *semaforo = (Semaforo *) tmpEvento.getElemento();
-			int tempo = tmpEvento.getTempo();
+			Semaforo *semaforo = (Semaforo *) tmpEvento->getElemento();
+			int tempo = tmpEvento->getTempo();
 			Pista *pistaDestino = semaforo->defineDestino();
 			bool conseguiu = semaforo->trocaDePista(pistaDestino);
 
@@ -177,24 +177,24 @@ class Regente {
 		void executorDeEventos() {
  			int tempo = 0;
  			for(int i = 0; i < eventos->getTamanho(); i++) {
- 				Evento evento = eventos->getEvento(i);
+ 				Evento *evento = eventos->getEvento(i);
  				if (tempo > tempoExecucao) {
  					break;
- 				} else if (evento.getTipo() == 0) {  // adiciona carro
- 					Pista *pista = (Pista *) evento.getElemento();
+ 				} else if (evento->getTipo() == 0) {  // adiciona carro
+ 					Pista *pista = (Pista *) evento->getElemento();
  					pista->adicionaCarro(new Carro());
- 					tempo = evento.getTempo();
- 				} else if (evento.getTipo() == 1) { // carro chega semáforo
+ 					tempo = evento->getTempo();
+ 				} else if (evento->getTipo() == 1) { // carro chega semáforo
  					eventosCarroNoSemaforo(evento);
- 					tempo = evento.getTempo();
- 				} else if (evento.getTipo() == 2) { // muda semaforo
- 					Semaforo *semaforo = (Semaforo *) evento.getElemento();
+ 					tempo = evento->getTempo();
+ 				} else if (evento->getTipo() == 2) { // muda semaforo
+ 					Semaforo *semaforo = (Semaforo *) evento->getElemento();
  					semaforo->mudaEstado();
- 					tempo = evento.getTempo();
- 				} else if (evento.getTipo() == 3) {  // remove carro
- 					Pista *pista = (Pista *) evento.getElemento();
+ 					tempo = evento->getTempo();
+ 				} else if (evento->getTipo() == 3) {  // remove carro
+ 					Pista *pista = (Pista *) evento->getElemento();
  					pista->retiraCarro(1);
- 					tempo = evento.getTempo();
+ 					tempo = evento->getTempo();
  				} else {
  					std::cout << "problema no código! \n";
  				}

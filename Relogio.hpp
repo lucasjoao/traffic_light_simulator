@@ -16,8 +16,8 @@ class Relogio : public ListaEnc<Evento*> {
 			return ListaEnc<Evento*>::getSize();
 		}
 
-		Evento getEvento(int posicao) {
-			return *ListaEnc<Evento*>::mostra(posicao);
+		Evento *getEvento(int posicao) {
+			return ListaEnc<Evento*>::mostra(posicao);
 		}
 };
 
