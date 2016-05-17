@@ -18,7 +18,8 @@ int main() {
 	regente->eventosCriarCarro();
 	regente->eventosChegadaSemaforo();
 	regente->eventosMudancaSemaforo();
-	// aqui deve-se instanciar o regente, chamar métodos que calculam os eventos, metodo que executa todos os eventos e finalizar execução com print do resultado final
+	regente->executorDeEventos();
+	regente->terminaTrabalho();
 
 	return 0;
 }

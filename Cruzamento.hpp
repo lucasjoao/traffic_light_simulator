@@ -13,10 +13,6 @@ class Cruzamento : ListaCirc<Semaforo*> {
 			ListaCirc<Semaforo*>::adiciona(semaforo);
 		}
 
-		int proximoEvento() {
-
-		}
-
 		int getSize() {
 			return ListaCirc<Semaforo*>::getSize();
 		}
@@ -25,7 +21,5 @@ class Cruzamento : ListaCirc<Semaforo*> {
 			return ListaCirc<Semaforo*>::mostra(posicao);
 		}
 
-	private:
-		// Lista *pistas;
 };
 #endif

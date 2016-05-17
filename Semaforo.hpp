@@ -15,16 +15,8 @@ class Semaforo {
 				_pistaSaida->inclui(pistas[i]);
 		}
 
-		int getTempoParaAbrir() {
-			return tempoParaAbrir;
-		}
-
-		int getTempoAberto() {
-			return tempoAberto;
-		}
-
-		bool getStatusAberto() {
-			return _status;
+		void mudaEstado() {
+			_status = !_status;
 		}
 
 		int proximaTrocaSinal(int tempo) {
@@ -33,11 +25,11 @@ class Semaforo {
 
 		Pista *defineDestino() {
 			Carro *carro = _pistaAferente->getCarroNoSemaforo();
-			int probabilidadeCarro = carro->calculaProbDeVirar();
+			int probabilidadeCarro = carro->getChanceDeVirar();
 
-			if (probabilidadeCarro < _probabilidades[0]) {
+			if (probabilidadeCarro <= _probabilidades[0]) {
 				return _pistaSaida->getDados()[0];
-			} else if (_probabilidades[1] < probabilidadeCarro) {
+			} else if (_probabilidades[1] <= probabilidadeCarro) {
 				return _pistaSaida->getDados()[2];
 			} else {
 				return _pistaSaida->getDados()[1];
@@ -54,9 +46,16 @@ class Semaforo {
 			return true;
 		}
 
+		int getTempoAberto() {
+			return tempoAberto;
+		}
+
+		bool getStatusAberto() {
+			return _status;
+		}
+
 	private:
 		bool _status;
-		int tempoParaAbrir;
 		int tempoAberto;
 		int *_probabilidades;
 		Pista *_pistaAferente;

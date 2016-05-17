@@ -24,10 +24,6 @@ class Evento {
     private:
         int _tempo;
         int _tipo;
-            // 0 = criar carro
-            // 1 = carro chega semáforo
-            // 2 = muda semáforo
-            // 3 = carro sai da pista
         void *_elemento;
 };
 #endif
