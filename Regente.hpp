@@ -62,11 +62,11 @@ class Regente {
 			Pista *pistaSaida6[3] = {l1leste, s2sul, c1oeste};
 			Pista *pistaSaida7[3] = {l1leste, n2norte, s2sul};
 
-			Semaforo *sn1sul = new Semaforo(false, tempoSemaforo, prob0, n1sul, pistaSaida0);
+			Semaforo *sn1sul = new Semaforo(true, tempoSemaforo, prob0, n1sul, pistaSaida0);
 			Semaforo *sc1oeste = new Semaforo(false, tempoSemaforo, prob1, c1oeste, pistaSaida1);
 			Semaforo *ss1norte = new Semaforo(false, tempoSemaforo, prob0, s1norte, pistaSaida2);
 			Semaforo *so1leste = new Semaforo(false, tempoSemaforo, prob0, o1leste, pistaSaida3);
-			Semaforo *sn2sul = new Semaforo(false, tempoSemaforo, prob1, n2sul, pistaSaida4);
+			Semaforo *sn2sul = new Semaforo(true, tempoSemaforo, prob1, n2sul, pistaSaida4);
 			Semaforo *sl1oeste = new Semaforo(false, tempoSemaforo, prob1, l1oeste, pistaSaida5);
 			Semaforo *ss2norte = new Semaforo(false, tempoSemaforo, prob1, s2norte, pistaSaida6);
 			Semaforo *sc1leste = new Semaforo(false, tempoSemaforo, prob1, c1leste, pistaSaida7);

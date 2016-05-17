@@ -13,11 +13,11 @@ class Relogio : public ListaEnc<Evento*> {
 		}
 
 		int getTamanho() {
-			ListaEnc<Evento*>::getSize();
+			return ListaEnc<Evento*>::getSize();
 		}
 
 		Evento getEvento(int posicao) {
-			ListaEnc<Evento*>::mostra(posicao);
+			return *ListaEnc<Evento*>::mostra(posicao);
 		}
 };
 

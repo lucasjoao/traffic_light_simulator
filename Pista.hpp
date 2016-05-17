@@ -63,7 +63,7 @@ class Pista : Fila<Carro*> {
 		}
 
 		int getCarrosEntraram() {
-			return carrosSairam;
+			return carrosEntraram;
 		}
 
 		int getCarrosSairam() {
