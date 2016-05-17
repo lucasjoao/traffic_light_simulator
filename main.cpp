@@ -16,9 +16,9 @@ int main() {
 	Regente *regente = new Regente(tempoExecucao, tempoSemaforo);
 	regente->start();
 	regente->eventosCriarCarro();
-	regente->eventosChegadaSemaforo();
-	regente->eventosMudancaSemaforo();
-	regente->executorDeEventos();
+	regente->eventosChegadaSemaforo(); // nao roda pq da linha 116, regente
+	regente->eventosMudancaSemaforo(); // nao roda, n sei pq
+	regente->executorDeEventos(); // nao roda, n sei pq
 	regente->terminaTrabalho();
 
 	return 0;

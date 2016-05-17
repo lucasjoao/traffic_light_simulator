@@ -49,26 +49,39 @@ class Regente {
 
 			int prob0[2] = {80, 90};
 			int prob1[2] = {40, 70};
-			Cruzamento *c1 = new Cruzamento();
-			Pista *pistaSaida0[3] = {c1leste, o1oeste, s1sul};
-			c1->adiciona(new Semaforo(false, tempoSemaforo, prob0, n1sul, pistaSaida0));
-			Pista *pistaSaida1[3] = {o1oeste, n1norte, s1sul};
-			c1->adiciona(new Semaforo(false, tempoSemaforo, prob1, c1oeste, pistaSaida1));
-			Pista *pistaSaida2[3] = {c1leste, n1norte, o1oeste};
-			c1->adiciona(new Semaforo(false, tempoSemaforo, prob0, s1norte, pistaSaida2));
-			Pista *pistaSaida3[3] = {c1leste, n1norte, s1sul};
-			c1->adiciona(new Semaforo(false, tempoSemaforo, prob0, o1leste, pistaSaida3));
-			cruzamentos->adiciona(c1);
 
+			Cruzamento *c1 = new Cruzamento();
 			Cruzamento *c2 = new Cruzamento();
+
+			Pista *pistaSaida0[3] = {c1leste, o1oeste, s1sul};
+			Pista *pistaSaida1[3] = {o1oeste, n1norte, s1sul};
+			Pista *pistaSaida2[3] = {c1leste, n1norte, o1oeste};
+			Pista *pistaSaida3[3] = {c1leste, n1norte, s1sul};
 			Pista *pistaSaida4[3] = {l1leste, c1oeste, s2sul};
-			c2->adiciona(new Semaforo(false, tempoSemaforo, prob1, n2sul, pistaSaida4));
 			Pista *pistaSaida5[3] = {n2norte, c1leste, s2sul};
-			c2->adiciona(new Semaforo(false, tempoSemaforo, prob1, l1oeste, pistaSaida5));
 			Pista *pistaSaida6[3] = {l1leste, s2sul, c1oeste};
-			c2->adiciona(new Semaforo(false, tempoSemaforo, prob1, s2norte, pistaSaida6));
 			Pista *pistaSaida7[3] = {l1leste, n2norte, s2sul};
-			c2->adiciona(new Semaforo(false, tempoSemaforo, prob1, c1leste, pistaSaida7));
+
+			Semaforo *sn1sul = new Semaforo(false, tempoSemaforo, prob0, n1sul, pistaSaida0);
+			Semaforo *sc1oeste = new Semaforo(false, tempoSemaforo, prob1, c1oeste, pistaSaida1);
+			Semaforo *ss1norte = new Semaforo(false, tempoSemaforo, prob0, s1norte, pistaSaida2);
+			Semaforo *so1leste = new Semaforo(false, tempoSemaforo, prob0, o1leste, pistaSaida3);
+			Semaforo *sn2sul = new Semaforo(false, tempoSemaforo, prob1, n2sul, pistaSaida4);
+			Semaforo *sl1oeste = new Semaforo(false, tempoSemaforo, prob1, l1oeste, pistaSaida5);
+			Semaforo *ss2norte = new Semaforo(false, tempoSemaforo, prob1, s2norte, pistaSaida6);
+			Semaforo *sc1leste = new Semaforo(false, tempoSemaforo, prob1, c1leste, pistaSaida7);
+
+			c1->adiciona(sn1sul);
+			c1->adiciona(sc1oeste);
+			c1->adiciona(ss1norte);
+			c1->adiciona(so1leste);
+
+			c2->adiciona(sn2sul);
+			c2->adiciona(sl1oeste);
+			c2->adiciona(ss2norte);
+			c2->adiciona(sc1leste);
+
+			cruzamentos->adiciona(c1);
 			cruzamentos->adiciona(c2);
 		}
 
@@ -152,7 +165,7 @@ class Regente {
 						tempo = semaforo->proximaTrocaSinal(tempo);
 						if (tempo <= tempoExecucao) {
 							evento = new Evento(tempo, 2, semaforo);
-							proxEvento = new Evento(tempo, 2, semaforo);
+							proxEvento = new Evento(tempo, 2, proxSemaforo);
 							eventos->adicionaEmOrdem(evento);
 							eventos->adicionaEmOrdem(proxEvento);
 						}
@@ -180,7 +193,7 @@ class Regente {
  					tempo = evento.getTempo();
  				} else if (evento.getTipo() == 3) {  // remove carro
  					Pista *pista = (Pista *) evento.getElemento();
- 					pista->retiraCarro();
+ 					pista->retiraCarro(1);
  					tempo = evento.getTempo();
  				} else {
  					std::cout << "problema no código! \n";

@@ -12,7 +12,7 @@ class Semaforo {
 			_pistaAferente = pista;
 
 			for (int i = 0; i < 3; i++)
-				_pistaSaida->inclui(pistas[i]);
+				_pistaSaida[i] = pistas[i];
 		}
 
 		void mudaEstado() {
@@ -28,11 +28,11 @@ class Semaforo {
 			int probabilidadeCarro = carro->getChanceDeVirar();
 
 			if (probabilidadeCarro <= _probabilidades[0]) {
-				return _pistaSaida->getDados()[0];
+				return _pistaSaida[0];
 			} else if (_probabilidades[1] <= probabilidadeCarro) {
-				return _pistaSaida->getDados()[2];
+				return _pistaSaida[2];
 			} else {
-				return _pistaSaida->getDados()[1];
+				return _pistaSaida[1];
 			}
 		}
 
@@ -42,7 +42,7 @@ class Semaforo {
 
 			Carro *carro = _pistaAferente->getCarroNoSemaforo();
 			pistaDestino->adicionaCarro(carro);
-			_pistaAferente->retiraCarro();
+			_pistaAferente->retiraCarro(0);
 			return true;
 		}
 
@@ -59,6 +59,6 @@ class Semaforo {
 		int tempoAberto;
 		int *_probabilidades;
 		Pista *_pistaAferente;
-		Fila<Pista*> *_pistaSaida;
+		Pista *_pistaSaida[3];
 };
 #endif

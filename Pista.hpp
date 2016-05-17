@@ -13,7 +13,7 @@ class Pista : Fila<Carro*> {
 			frequencia = freq;
 			variacaoFrequencia = varFreq;
 			espacoLivre = tam;
-			tempoPercorrer = tamanho / velocidade;
+			tempoPercorrer = (int) (tamanho / velocidade);
 
 			if (freq != 0) {
 				fonte = true;
@@ -36,11 +36,12 @@ class Pista : Fila<Carro*> {
 			}
 		}
 
-		void retiraCarro() {
+		void retiraCarro(int tipo) {
 			Carro *carro = Fila<Carro*>::retira();
 			int tamCar = carro->getTamanho();
 			espacoLivre += tamCar;
-			carrosSairam += 1;
+			if (tipo == 1)
+				carrosSairam += 1;
 		}
 
 		int proximaCriacaoCarro(int tempo) {
