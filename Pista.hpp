@@ -7,7 +7,7 @@
 
 class Pista : Fila<Carro*> {
 	public:
-		Pista(int vel, int tam, int freq, int varFreq) {
+		Pista(int vel, int tam, int freq, int varFreq) :                       									Fila<Carro*>::Fila<Carro*>(tam) {
 			velocidade = vel;
 			tamanho = tam;
 			frequencia = freq;
