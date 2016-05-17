@@ -34,7 +34,7 @@ class Regente {
 			Pista *s2sul = new Pista(40, 500, 0, 0);
 			Pista *s2norte = new Pista(40, 500, 60, 15);*/
 
-			pistas->adiciona(new Pista(80, 2000, 0, 0));
+/*			pistas->adiciona(new Pista(80, 2000, 0, 0));
 			pistas->adiciona(new Pista(80, 2000, 10, 2));
 			pistas->adiciona(new Pista(60, 300, 0, 42));
 			pistas->adiciona(new Pista(60, 300, 0, 42));
@@ -47,7 +47,37 @@ class Regente {
 			pistas->adiciona(new Pista(60, 500, 0, 0));
 			pistas->adiciona(new Pista(60, 500, 30, 7));
 			pistas->adiciona(new Pista(40, 500, 0, 0));
-			pistas->adiciona(new Pista(40, 500, 60, 15));
+			pistas->adiciona(new Pista(40, 500, 60, 15));*/
+
+			Pista *o1oeste = new Pista(80, 2000, 0, 0);
+			Pista *o1leste = new Pista(80, 2000, 10, 2);
+			Pista *c1oeste = new Pista(60, 300, 0, 0);
+			Pista *c1leste = new Pista(60, 300, 0, 0);
+			Pista *l1oeste = new Pista(30, 400, 10, 2);
+			Pista *l1leste = new Pista(30, 400, 0, 0);
+			Pista *n1sul = new Pista(60, 500, 20, 5);
+			Pista *n1norte = new Pista(60, 500, 0, 0);
+			Pista *n2sul = new Pista(40, 500, 20, 5);
+			Pista *n2norte = new Pista(40, 500, 0, 0);
+			Pista *s1sul = new Pista(60, 500, 0, 0);
+			Pista *s1norte = new Pista(60, 500, 30, 7);
+			Pista *s2sul = new Pista(40, 500, 0, 0);
+			Pista *s2norte = new Pista(40, 500, 60, 15);
+
+			pistas->adiciona(o1oeste);
+			pistas->adiciona(o1leste);
+			pistas->adiciona(c1oeste));
+			pistas->adiciona(c1leste));
+			pistas->adiciona(l1oeste);
+			pistas->adiciona(l1leste);
+			pistas->adiciona(n1sul);
+			pistas->adiciona(n1norte);
+			pistas->adiciona(n2sul);
+			pistas->adiciona(n2norte);
+			pistas->adiciona(s1sul);
+			pistas->adiciona(s1norte);
+			pistas->adiciona(s2sul);
+			pistas->adiciona(s2norte);
 
 			/* só de precisar de uma var com nome
 			 *
@@ -60,18 +90,36 @@ class Regente {
 			Semaforo *s1oeste = new Semaforo(false, tempoSemaforo);
 			Semaforo *s2oeste = new Semaforo(false, tempoSemaforo);*/
 
+			int prob0[2] = {80, 90};
+			int prob1[2] = {40, 70};
 			Cruzamento *c1 = new Cruzamento();
-			c1->adiciona(new Semaforo(false, tempoSemaforo));
-			c1->adiciona(new Semaforo(false, tempoSemaforo));
-			c1->adiciona(new Semaforo(false, tempoSemaforo));
-			c1->adiciona(new Semaforo(false, tempoSemaforo));
+			// add n1sul
+			Pista *pistaSaida0[3] = {c1leste, o1oeste, s1sul};
+			c1->adiciona(new Semaforo(false, tempoSemaforo, prob0, n1sul, pistaSaida0));
+			// add c1oeste
+			Pista *pistaSaida1[3] = {o1oeste, n1norte, s1sul};
+			c1->adiciona(new Semaforo(false, tempoSemaforo, prob1, c1oeste, pistaSaida1));
+			// add s1norte
+			Pista *pistaSaida2[3] = {c1leste, n1norte, o1oeste};
+			c1->adiciona(new Semaforo(false, tempoSemaforo, prob0, s1norte, pistaSaida2));
+			// add o1leste
+			Pista *pistaSaida3[3] = {c1leste, n1norte, s1sul};
+			c1->adiciona(new Semaforo(false, tempoSemaforo, prob0, o1leste, pistaSaida3));
 			cruzamentos->adiciona(c1);
 
 			Cruzamento *c2 = new Cruzamento();
-			c2->adiciona(new Semaforo(false, tempoSemaforo));
-			c2->adiciona(new Semaforo(false, tempoSemaforo));
-			c2->adiciona(new Semaforo(false, tempoSemaforo));
-			c2->adiciona(new Semaforo(false, tempoSemaforo));
+			// add n2sul
+			Pista *pistaSaida4[3] = {l1leste, c1oeste, s2sul};
+			c2->adiciona(new Semaforo(false, tempoSemaforo, prob1, n2sul, pistaSaida4));
+			// add l1oeste
+			Pista *pistaSaida5[3] = {n2norte, c1leste, s2sul};
+			c2->adiciona(new Semaforo(false, tempoSemaforo, prob1, l1oeste, pistaSaida5));
+			// add s2norte
+			Pista *pistaSaida6[3] = {l1leste, s2sul, c1oeste};
+			c2->adiciona(new Semaforo(false, tempoSemaforo, prob1, s2norte, pistaSaida6));
+			// add c1leste
+			Pista *pistaSaida7[3] = {l1leste, n2norte, s2sul};
+			c2->adiciona(new Semaforo(false, tempoSemaforo, prob1, c1leste, pistaSaida7));
 			cruzamentos->adiciona(c2);
 		}
 
@@ -120,22 +168,30 @@ class Regente {
 			}
 		}
 
-		void eventosCarroNoSemaforo(Evento *evento) {
-			/* Preciso:
-			 *		para qual pista o carro vai? relação probabilidade
-			 			fazer defineDestino
-			 *		adiciona o carro nessa pista e retira da velha - somente se for possível
-			 *		se o sinal está aberto e conseguiu mudar de pista, ele cria evento para o momento
-			 *			se a pista for sumidouro, cria evento de retirada do carro
-			 *			se a pista não for sumidouro, cria evento de chegada no semaforo
-			 *		se o sinal está aberto e não consegue mudar de pista, ele cria evento para daqui a um segundo
-			 *		se o sinal está fechado, ele cria evento para quando abrir
-			 */
-			 Semaforo *semaforo = (Semaforo *) evento->getElemento();
-			 int tempo = evento->getTempo();
-			 Pista *pistaDestino = semaforo->defineDestino();
+		void eventosCarroNoSemaforo(Evento *tmpEvento) {
+			Evento *evento;
+			Semaforo *semaforo = (Semaforo *) tmpEvento->getElemento();
+			int tempo = tmpEvento->getTempo();
+			Pista *pistaDestino = semaforo->defineDestino();
+			bool conseguiu = semaforo->trocaDePista(pistaDestino);
 
+			if (semaforo->getStatusAberto()) {
+				if (conseguiu) {
+					tempo += pistaDestino->getTempoPercorrer();
+					if (pistaDestino->getSumidouro())
+						evento = new Evento(tempo, 3, pistaDestino);
+					else
+						evento = new Evento(tempo, 1, 0);
+				} else {
+					tempo += 1;
+					evento = new Evento(tempo, 1, 0);
+				}
+			} else {
+				tempo += semaforo->getTempoAberto();
+				evento = new Evento(tempo, 1, 0);
+			}
 
+			eventos->adicionaEmOrdem(evento);
 		}
 
 		/*

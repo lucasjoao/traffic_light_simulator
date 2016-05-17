@@ -141,5 +141,9 @@ class Fila {
 		void inicializaFila() {
 			numeroUltimo = -1;
 		}
+
+		T *getDados() {
+			return dados;
+		}
 };
 #endif

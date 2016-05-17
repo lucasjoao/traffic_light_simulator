@@ -5,7 +5,7 @@
 #include "estruturas/Lista.hpp"
 #include "Carro.hpp"
 
-class Pista : Fila<Carro> {
+class Pista : Fila<Carro*> {
 	public:
 		Pista(int vel, int tam, int freq, int varFreq) {
 			velocidade = vel;
@@ -47,6 +47,18 @@ class Pista : Fila<Carro> {
 
 		bool getFonte() {
 			return fonte;
+		}
+
+		bool getSumidouro() {
+			return sumidouro;
+		}
+
+		Carro *getCarroNoSemaforo() {
+			return Fila<Carro*>::getDados()[0];
+		}
+
+		bool pistaCheia() {
+			return Fila<Carro*>::filaCheia();
 		}
 
 	private:
