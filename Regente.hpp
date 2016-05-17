@@ -151,7 +151,7 @@ class Regente {
 
 		void eventosMudancaSemaforo() {
 			Semaforo *semaforo;
-			Semaforo *proxSemaforo;
+			Semaforo *proxSem;
 			Evento *evento;
 			Evento *proxEvento;
 			Cruzamento *tmpCruzamento;
@@ -162,11 +162,16 @@ class Regente {
 					tempo = 0;
 					while (tempo <= tempoExecucao) {
 						semaforo = (Semaforo *) tmpCruzamento->getSem(j);
-						proxSemaforo = (Semaforo *) tmpCruzamento->getSem(j+1);
+
+						if (j == 3)
+							proxSem = (Semaforo *) tmpCruzamento->getSem(0);
+						else
+							proxSem = (Semaforo *) tmpCruzamento->getSem(j+1);
+
 						tempo = semaforo->proximaTrocaSinal(tempo);
 						if (tempo <= tempoExecucao) {
 							evento = new Evento(tempo, 2, semaforo);
-							proxEvento = new Evento(tempo, 2, proxSemaforo);
+							proxEvento = new Evento(tempo, 2, proxSem);
 							eventos->adicionaEmOrdem(evento);
 							eventos->adicionaEmOrdem(proxEvento);
 						}

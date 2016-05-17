@@ -17,7 +17,7 @@ int main() {
 	regente->start();
 	regente->eventosCriarCarro();
 	regente->eventosChegadaSemaforo();
-	// regente->eventosMudancaSemaforo(); // nao roda, n sei pq
+	regente->eventosMudancaSemaforo();
 	// regente->executorDeEventos(); // nao roda, n sei pq
 	regente->terminaTrabalho();
 
