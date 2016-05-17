@@ -34,8 +34,8 @@ class Regente {
 
 			pistas->adiciona(o1oeste);
 			pistas->adiciona(o1leste);
-			pistas->adiciona(c1oeste));
-			pistas->adiciona(c1leste));
+			pistas->adiciona(c1oeste);
+			pistas->adiciona(c1leste);
 			pistas->adiciona(l1oeste);
 			pistas->adiciona(l1leste);
 			pistas->adiciona(n1sul);
@@ -109,10 +109,10 @@ class Regente {
 			}
 		}
 
-		void eventosCarroNoSemaforo(Evento *tmpEvento) {
+		void eventosCarroNoSemaforo(Evento tmpEvento) {
 			Evento *evento;
-			Semaforo *semaforo = (Semaforo *) tmpEvento->getElemento();
-			int tempo = tmpEvento->getTempo();
+			Semaforo *semaforo = (Semaforo *) tmpEvento.getElemento();
+			int tempo = tmpEvento.getTempo();
 			Pista *pistaDestino = semaforo->defineDestino();
 			bool conseguiu = semaforo->trocaDePista(pistaDestino);
 

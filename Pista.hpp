@@ -37,7 +37,7 @@ class Pista : Fila<Carro*> {
 		}
 
 		void retiraCarro() {
-			Carro carro = Fila<Carro*>::retira();
+			Carro *carro = Fila<Carro*>::retira();
 			int tamCar = carro->getTamanho();
 			espacoLivre += tamCar;
 			carrosSairam += 1;
