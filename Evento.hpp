@@ -3,10 +3,12 @@
 
 class Evento {
     public:
-        Evento(int tempo, int tipo, void *elemento) {
+        Evento(int tempo, int tipo, void *elemPrinc, void *elemSecun) {
             _tempo = tempo;
             _tipo = tipo;
-            _elemento = elemento;
+            _elementoPrincipal = elemPrinc;
+            _elementoSecundario = elemSecun;
+
         }
 
         int getTipo() {
@@ -17,13 +19,19 @@ class Evento {
             return _tempo;
         }
 
-        void *getElemento() {
-            return _elemento;
+        void *getElementoPrincipal() {
+            return _elementoPrincipal;
+        }
+
+        void *getElementoSecundario() {
+            return _elementoSecundario;
         }
 
     private:
         int _tempo;
         int _tipo;
-        void *_elemento;
+        void *_elementoPrincipal;
+        void *_elementoSecundario;
+
 };
 #endif

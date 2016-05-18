@@ -4,7 +4,6 @@
 #include "estruturas/Fila.hpp"
 #include "estruturas/Lista.hpp"
 #include "Carro.hpp"
-// #include "Semaforo.hpp"
 
 class Pista : Fila<Carro*> {
 	public:
@@ -79,13 +78,13 @@ class Pista : Fila<Carro*> {
 			return sumidouro;
 		}
 
-		Semaforo *getSemaforoDaPista() {
-			return semaforoDaPista;
-		}
+		// Semaforo *getSemaforoDaPista() {
+		// 	return semaforoDaPista;
+		// }
 
-		void setSemaforoDaPista(Semaforo *semaforo) {
-			semaforoDaPista = semaforo;
-		}
+		// void setSemaforoDaPista(Semaforo *semaforo) {
+		// 	semaforoDaPista = semaforo;
+		// }
 
 	private:
 		int velocidade;
@@ -96,7 +95,7 @@ class Pista : Fila<Carro*> {
 		int tempoPercorrer;
 		int carrosEntraram;
 		int carrosSairam;
-		Semaforo *semaforoDaPista;
+		// Semaforo *semaforoDaPista;
 		bool fonte;
 		bool sumidouro;
 };

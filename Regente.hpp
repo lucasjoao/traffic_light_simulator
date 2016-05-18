@@ -56,14 +56,14 @@ class Regente {
 			Semaforo *ss2norte = new Semaforo(false, tempoSemaforo, prob1, s2norte, pistaSaida6);
 			Semaforo *sc1leste = new Semaforo(false, tempoSemaforo, prob1, c1leste, pistaSaida7);
 
-			n1sul->setSemaforoDaPista(sn1sul);
-			c1oeste->setSemaforoDaPista(sc1oeste);
-			s1norte->setSemaforoDaPista(ss1norte);
-			o1leste->setSemaforoDaPista(so1leste);
-			n2sul->setSemaforoDaPista(sn2sul);
-			l1oeste->setSemaforoDaPista(sl1oeste);
-			s2norte->setSemaforoDaPista(ss2norte);
-			c1leste->setSemaforoDaPista(sc1leste);
+			// n1sul->setSemaforoDaPista(sn1sul);
+			// c1oeste->setSemaforoDaPista(sc1oeste);
+			// s1norte->setSemaforoDaPista(ss1norte);
+			// o1leste->setSemaforoDaPista(so1leste);
+			// n2sul->setSemaforoDaPista(sn2sul);
+			// l1oeste->setSemaforoDaPista(sl1oeste);
+			// s2norte->setSemaforoDaPista(ss2norte);
+			// c1leste->setSemaforoDaPista(sc1leste);
 
 			pistas->adiciona(o1oeste);
 			pistas->adiciona(o1leste);
@@ -106,7 +106,7 @@ class Regente {
 					while(tempo < tempoExecucao) {
 						tempo = pista->proximaCriacaoCarro(tempo);
 						if (tempo <= tempoExecucao) {
-							evento = new Evento(tempo, 0, pista);
+							evento = new Evento(tempo, 0, pista, 0);
                     		eventos->adicionaEmOrdem(evento);
 						}
 					}
@@ -114,18 +114,35 @@ class Regente {
 			}
 		}
 
+		Semaforo *semaforoDaPista(Pista *pista) {
+			Semaforo *semaforo;
+			Cruzamento *tmpCruzamento;
+			for (int i = 0; i < cruzamentos->getMaxLista(); i++) {
+				tmpCruzamento = cruzamentos->getDados()[i];
+				for (int j = 0; j < tmpCruzamento->getSize(); j++) {
+					semaforo = (Semaforo *) tmpCruzamento->getSem(j);
+					if (pista == semaforo->getPistaAferente())
+						return semaforo;
+				}
+			}
+
+			return nullptr;
+		}
+
 		void eventosChegadaSemaforo() {
 			Pista *pista;
 			Evento *evento;
+			Semaforo *semaforo;
 			int tempo;
 			int nroEventos = eventos->getTamanho();
 			for (int i = 0; i < nroEventos; i++) {
 				if (eventos->getEvento(i)->getTipo() == 0) {
 					tempo = eventos->getEvento(i)->getTempo();
-					pista = (Pista *) eventos->getEvento(i)->getElemento();
+					pista = (Pista *) eventos->getEvento(i)->getElementoPrincipal();
+					semaforo = semaforoDaPista(pista);
 					tempo += pista->getTempoPercorrer();
 					if (tempo <= tempoExecucao) {
-						evento = new Evento(tempo, 1, 0);
+						evento = new Evento(tempo, 1, 0, semaforo);
 						eventos->adicionaEmOrdem(evento);
 					}
 				}
@@ -153,8 +170,8 @@ class Regente {
 
 						tempo = semaforo->proximaTrocaSinal(tempo);
 						if (tempo <= tempoExecucao) {
-							evento = new Evento(tempo, 2, semaforo);
-							proxEvento = new Evento(tempo, 2, proxSem);
+							evento = new Evento(tempo, 2, semaforo, 0);
+							proxEvento = new Evento(tempo, 2, proxSem, 0);
 							eventos->adicionaEmOrdem(evento);
 							eventos->adicionaEmOrdem(proxEvento);
 						}
@@ -164,11 +181,10 @@ class Regente {
 		}
 
 		// pode ter problema nessa lógica, revisar ++
-
-		// meu evento precisa ter uma pista e um semáforo, pensei no evento ter um semáforo, mas dá problema
+		// realmente precisa de dois elementos no evento???
 		void eventosCarroNoSemaforo(Evento *tmpEvento) {
 			Evento *evento;
-			Semaforo *semaforo = (Semaforo *) tmpEvento->getElemento();
+			Semaforo *semaforo = (Semaforo *) tmpEvento->getElementoSecundario();
 			int tempo = tmpEvento->getTempo();
 			Pista *pistaDestino = semaforo->defineDestino();
 			bool conseguiu = semaforo->trocaDePista(pistaDestino);
@@ -177,16 +193,16 @@ class Regente {
 				if (conseguiu) {
 					tempo += pistaDestino->getTempoPercorrer();
 					if (pistaDestino->getSumidouro())
-						evento = new Evento(tempo, 3, pistaDestino);
+						evento = new Evento(tempo, 3, pistaDestino, 0);
 					else
-						evento = new Evento(tempo, 1, 0);
+						evento = new Evento(tempo, 1, 0, 0);
 				} else {
 					tempo += 1;
-					evento = new Evento(tempo, 1, 0);
+					evento = new Evento(tempo, 1, 0, 0);
 				}
 			} else {
 				tempo = semaforo->proximaTrocaSinal(tempo);
-				evento = new Evento(tempo, 1, 0);
+				evento = new Evento(tempo, 1, 0, 0);
 			}
 
 			eventos->adicionaEmOrdem(evento);
@@ -200,18 +216,18 @@ class Regente {
  				if (tempo > tempoExecucao) {
  					break;
  				} else if (evento->getTipo() == 0) {  // adiciona carro
- 					Pista *pista = (Pista *) evento->getElemento();
+ 					Pista *pista = (Pista *) evento->getElementoPrincipal();
  					pista->adicionaCarro(new Carro());
  					tempo = evento->getTempo();
- 				} else if (evento->getTipo() == 1) { // carro chega semáforo
+ 				} else if (evento->getTipo() == 1) { // carro chega semaforo
  					eventosCarroNoSemaforo(evento);
  					tempo = evento->getTempo();
  				} else if (evento->getTipo() == 2) { // muda semaforo
- 					Semaforo *semaforo = (Semaforo *) evento->getElemento();
+ 					Semaforo *semaforo = (Semaforo *) evento->getElementoPrincipal();
  					semaforo->mudaEstado();
  					tempo = evento->getTempo();
  				} else if (evento->getTipo() == 3) {  // remove carro
- 					Pista *pista = (Pista *) evento->getElemento();
+ 					Pista *pista = (Pista *) evento->getElementoPrincipal();
  					pista->retiraCarro(1);
  					tempo = evento->getTempo();
  				} else {

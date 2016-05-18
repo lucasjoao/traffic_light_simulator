@@ -54,6 +54,10 @@ class Semaforo {
 			return _status;
 		}
 
+		Pista *getPistaAferente() {
+			return _pistaAferente;
+		}
+
 	private:
 		bool _status;
 		int tempoAberto;
