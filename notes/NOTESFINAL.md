@@ -1,0 +1,12 @@
+__to-do__
+- ver se adiciona em ordem, se não, fazer adicionar em ordem (precisa sobrescrever operador)
+- fazer funcionar
+- revisar lógica dos métodos anotados
+- verificar se precisa que o evento segure dois elementos
+- print por toda a parte
+- destrutores e tirar memoryleaks
+- precisa do if na linha 144 eventosChegadaSemaforo
+- olhar critério de avaliação do grupo1 para ver o que pode ser melhorado
+- documentação supimpa
+- fazer um leia-me com algo e com tag de compilação ou makefile
+- testar em distros diferentes
