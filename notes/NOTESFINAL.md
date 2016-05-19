@@ -1,5 +1,4 @@
 __to-do__
-- ver se adiciona em ordem, se não, fazer adicionar em ordem (precisa sobrescrever operador)
 - fazer funcionar
 - revisar lógica dos métodos anotados
 - fazer funcionar direito

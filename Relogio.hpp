@@ -12,7 +12,7 @@ class Relogio : public ListaEnc<Evento*> {
 		// 	ListaEnc<Evento*>::adicionaEmOrdem(evento);
 		// }
 
-		bool maior(Evento *evento0, Evento *evento1) const {
+		bool maior(Evento *evento0, Evento *evento1) {
 			return evento0->getTempo() > evento1->getTempo();
 		}
 
