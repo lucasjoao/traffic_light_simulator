@@ -2,11 +2,15 @@ __to-do__
 - ver se adiciona em ordem, se não, fazer adicionar em ordem (precisa sobrescrever operador)
 - fazer funcionar
 - revisar lógica dos métodos anotados
+- fazer funcionar direito
+- mudar para switch case
 - verificar se precisa que o evento segure dois elementos
+- verificar se precisa eu crie um método que só chama a classe o da classe pai
 - print por toda a parte
 - destrutores e tirar memoryleaks
 - precisa do if na linha 144 eventosChegadaSemaforo
 - olhar critério de avaliação do grupo1 para ver o que pode ser melhorado
 - documentação supimpa
+    - documentar lista encadeada
 - fazer um leia-me com algo e com tag de compilação ou makefile
 - testar em distros diferentes

@@ -8,8 +8,12 @@ class Relogio : public ListaEnc<Evento*> {
 	public:
 		Relogio() {}
 
-		void adicionaEmOrdem(Evento *evento) {
-			ListaEnc<Evento*>::adicionaEmOrdem(evento);
+		// void adicionaEmOrdem(Evento *evento) {
+		// 	ListaEnc<Evento*>::adicionaEmOrdem(evento);
+		// }
+
+		bool maior(Evento *evento0, Evento *evento1) const {
+			return evento0->getTempo() > evento1->getTempo();
 		}
 
 		int getTamanho() {

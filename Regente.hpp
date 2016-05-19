@@ -181,7 +181,6 @@ class Regente {
 		}
 
 		// pode ter problema nessa lógica, revisar ++
-		// realmente precisa de dois elementos no evento???
 		void eventosCarroNoSemaforo(Evento *tmpEvento) {
 			Evento *evento;
 			Semaforo *semaforo = (Semaforo *) tmpEvento->getElementoSecundario();
@@ -208,7 +207,7 @@ class Regente {
 			eventos->adicionaEmOrdem(evento);
 		}
 
-		// pode ter problema nessa lógica, revisar
+		// pode ter problema nessa lógica, revisar! Quais devem ser executados primeiro?
 		void executorDeEventos() {
  			int tempo = 0;
  			for(int i = 0; i < eventos->getTamanho(); i++) {

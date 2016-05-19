@@ -160,13 +160,18 @@ class ListaEnc {
 				Elemento<T> *tmpElemento = head;
 
 				int i = 0;
-				for (; i < size; i++) {
-					if (maior(tmpElemento->getInfo(), dado) ||
-						tmpElemento->getProximo() == nullptr)
-							break;
 
+				while (tmpElemento != nullptr && maior(dado, tmpElemento->getInfo())) {
 					tmpElemento = tmpElemento->getProximo();
+					++i;
 				}
+				// for (; i < size; i++) {
+				// 	if (maior(tmpElemento->getInfo(), dado) ||
+				// 		tmpElemento->getProximo() == nullptr)
+				// 			break;
+
+				// 	tmpElemento = tmpElemento->getProximo();
+				// }
 
 				adicionaNaPosicao(dado, i);
 			}
@@ -453,14 +458,7 @@ class ListaEnc {
 			return dado1 == dado2;
 		}
 
-		/**
-		 *	Funcao maior
-		 * 	Verifica se o primeiro dado e maior que o segundo dado.
-		 *  Parametro dado1 e um tipo generico que representa o primeiro dado.
-		 *	Parametro dado2 e um tipo generico que representa o segundo dado.
-		 *  Retorna o valor booleano que resulta da comparacao.
-		 */
-		bool maior(T dado1, T dado2) {
+		virtual bool maior(T dado1, T dado2) {
 			return dado1 > dado2;
 		}
 
