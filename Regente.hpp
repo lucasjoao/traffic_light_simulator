@@ -212,29 +212,35 @@ class Regente {
  			int tempo = 0;
  			for(int i = 0; i < eventos->getTamanho(); i++) {
  				Evento *evento = eventos->getEvento(i);
- 				if (tempo > tempoExecucao) {
- 					break;
- 				} else if (evento->getTipo() == 0) {  // adiciona carro
- 					Pista *pista = (Pista *) evento->getElementoPrincipal();
- 					pista->adicionaCarro(new Carro());
- 					tempo = evento->getTempo();
- 				} else if (evento->getTipo() == 1) { // carro chega semaforo
- 					eventosCarroNoSemaforo(evento);
- 					tempo = evento->getTempo();
- 				} else if (evento->getTipo() == 2) { // muda semaforo
- 					Semaforo *semaforo = (Semaforo *) evento->getElementoPrincipal();
- 					semaforo->mudaEstado();
- 					tempo = evento->getTempo();
- 				} else if (evento->getTipo() == 3) {  // remove carro
- 					Pista *pista = (Pista *) evento->getElementoPrincipal();
- 					pista->retiraCarro(1);
- 					tempo = evento->getTempo();
- 				} else {
- 					std::cout << "problema no código! \n";
- 				}
- 			}
 
- 		}
+				if (tempo > tempoExecucao)
+ 					break;
+
+				Pista *pista = (Pista *) evento->getElementoPrincipal();
+				Semaforo *semaforo = (Semaforo *) evento->getElementoPrincipal();
+
+				switch (evento->getTipo()) {
+					case 0: // add carro
+						pista->adicionaCarro(new Carro());
+						tempo = evento->getTempo();
+						break;
+					case 1: // carro chega no semaforo
+						eventosCarroNoSemaforo(evento);
+						tempo = evento->getTempo();
+						break;
+					case 2: // muda semaforo
+						semaforo->mudaEstado();
+						tempo = evento->getTempo();
+						break;
+					case 3: // retira carro
+						pista->retiraCarro(0); //!< 0 ou 1?
+						tempo = evento->getTempo();
+						break;
+					default:
+						std::cout << "problema no código! \n";
+				}
+			}
+		}
 
 		void terminaTrabalho() {
 			int entraram;
