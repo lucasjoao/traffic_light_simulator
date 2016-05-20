@@ -32,10 +32,14 @@ class Lista {
 		 *  Instancia um vetor para o atributo dados.
 		 *  Parametro tam e um inteiro que indica o tamanho do vetor.
 		 */
-		explicit Lista(int tam) {
+		Lista<T>(int tam) {
 			maxLista = tam;
 			ultimo = -1;
 			dados = new T[tam];
+		}
+
+		~Lista() {
+			delete[] dados;
 		}
 
 		/**

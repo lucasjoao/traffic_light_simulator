@@ -78,14 +78,6 @@ class Pista : Fila<Carro*> {
 			return sumidouro;
 		}
 
-		// Semaforo *getSemaforoDaPista() {
-		// 	return semaforoDaPista;
-		// }
-
-		// void setSemaforoDaPista(Semaforo *semaforo) {
-		// 	semaforoDaPista = semaforo;
-		// }
-
 	private:
 		int velocidade;
 		int tamanho;
@@ -95,7 +87,6 @@ class Pista : Fila<Carro*> {
 		int tempoPercorrer;
 		int carrosEntraram;
 		int carrosSairam;
-		// Semaforo *semaforoDaPista;
 		bool fonte;
 		bool sumidouro;
 };

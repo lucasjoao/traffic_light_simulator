@@ -80,6 +80,8 @@ class ListaCirc {
 			    }
 
 			    size += 1;
+			   	tmpElemento = 0;
+				delete tmpElemento;
 			}
 		}
 
@@ -127,6 +129,10 @@ class ListaCirc {
 						antElemento->setProximo(tmpElemento);
 
 						size += 1;
+						tmpElemento = 0;
+						antElemento = 0;
+						delete tmpElemento;
+						delete antElemento;
 					}
 				}
 			}
@@ -168,6 +174,8 @@ class ListaCirc {
 					tmpElemento = tmpElemento->getProximo();
 				}
 
+				tmpElemento = 0;
+				delete tmpElemento;
 				adicionaNaPosicao(dado, i);
 			}
 		}
@@ -255,6 +263,8 @@ class ListaCirc {
 					tmpInfo = tmpElemento->getInfo();
 					antElemento->setProximo(tmpElemento->getProximo());
 					size -= 1;
+					antElemento = 0;
+					delete antElemento;
 					delete tmpElemento;
 					return tmpInfo;
 				}
@@ -319,6 +329,10 @@ class ListaCirc {
 					eliminaDoInicio();
 					size -= 1;
 				}
+
+				tmpElemento = 0;
+				delete tmpElemento;
+				// delete sentinel;
 			}
 		}
 
@@ -348,6 +362,9 @@ class ListaCirc {
 
 				tmpElemento = tmpElemento->getProximo();
 			}
+
+			tmpElemento = 0;
+			delete tmpElemento;
 
 			if (i == size)
 				throw "problema";
@@ -381,10 +398,14 @@ class ListaCirc {
 				 tmpElemento = tmpElemento->getProximo();
 			}
 
+			T tmpPos = &tmpElemento;
+			tmpElemento = 0;
+			delete tmpElemento;
+
 			if (i == size)
 				throw "problema";
 			else
-				return &tmpElemento;
+				return tmpPos;
 		}
 
 		/*!
@@ -403,12 +424,15 @@ class ListaCirc {
 				throw "problema";
 			} else {
 				Elemento<T> *tmpElemento = head;
+				T tmpInfo;
 
 				while (pos-- != 0)
 					tmpElemento = tmpElemento->getProximo();
 
-				return tmpElemento->getInfo();
-			}
+				tmpInfo = tmpElemento->getInfo();
+				tmpElemento = 0;
+				delete tmpElemento;
+				return tmpInfo;			}
 		}
 
 		/*!

@@ -77,6 +77,8 @@ class ListaEnc {
 				tmpElemento->setProximo(head);
 				head = tmpElemento;
 				size += 1;
+				tmpElemento = nullptr;
+				delete tmpElemento;
 			}
 		}
 
@@ -130,6 +132,11 @@ class ListaEnc {
 
 						size += 1;
 					}
+
+					tmpElemento = nullptr;
+					antElemento = nullptr;
+					delete tmpElemento;
+					delete antElemento;
 				}
 			}
 		}
@@ -147,6 +154,8 @@ class ListaEnc {
 					i++;
 				}
 
+				tmpElemento = 0;
+				delete tmpElemento;
 				adicionaNaPosicao(dado, i);
 			}
 		}
@@ -236,6 +245,8 @@ class ListaEnc {
 					tmpInfo = tmpElemento->getInfo();
 					antElemento->setProximo(tmpElemento->getProximo());
 					size -= 1;
+					antElemento = 0;
+					delete antElemento;
 					delete tmpElemento;
 					return tmpInfo;
 				}
@@ -297,6 +308,9 @@ class ListaEnc {
 					eliminaDoInicio();
 					size -= 1;
 				}
+
+				tmpElemento = 0;
+				delete tmpElemento;
 			}
 		}
 
@@ -316,11 +330,15 @@ class ListaEnc {
 				throw "problema";
 			} else {
 				Elemento<T> *tmpElemento = head;
+				T tmpInfo;
 
 				while (pos-- != 0)
 					tmpElemento = tmpElemento->getProximo();
 
-				return tmpElemento->getInfo();
+				tmpInfo = tmpElemento->getInfo();
+				tmpElemento = 0;
+				delete tmpElemento;
+				return tmpInfo;
 			}
 		}
 
@@ -349,6 +367,9 @@ class ListaEnc {
 
 				tmpElemento = tmpElemento->getProximo();
 			}
+
+			tmpElemento = 0;
+			delete tmpElemento;
 
 			if (i == size)
 				throw "problema";
@@ -381,10 +402,14 @@ class ListaEnc {
 				 tmpElemento = tmpElemento->getProximo();
 			}
 
+			T tmpPos = &tmpElemento;
+			tmpElemento = 0;
+			delete tmpElemento;
+
 			if (i == size)
 				throw "problema";
 			else
-				return &tmpElemento;
+				return tmpPos;
 		}
 
 		/**
@@ -406,6 +431,9 @@ class ListaEnc {
 
 				tmpElemento = tmpElemento->getProximo();
 			}
+
+			tmpElemento = 0;
+			delete tmpElemento;
 
 			return false;
 		}

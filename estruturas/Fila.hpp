@@ -34,6 +34,10 @@ class Fila {
 			dados = new T[tam];
 		}
 
+		~Fila() {
+			delete[] dados;
+		}
+
 		/** Função inclui
 		 *  Se a fila não estiver cheia, então aumenta o número que indica a
 		 *  	a posição do último e coloca um elemento nessa nova posição.
