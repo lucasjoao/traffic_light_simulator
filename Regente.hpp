@@ -124,21 +124,23 @@ class Regente {
 			Pista *pista;
 			Evento *evento;
 			Semaforo *semaforo;
+			Relogio *tmpEventos = new Relogio();
 			int tempo;
-			int nroEventos = eventos->getTamanho();
+			int nroEventosPrincipal = eventos->getTamanho();
 
-			for (int i = 0; i < nroEventos; i++) {
-				if (eventos->getEvento(i)->getTipo() == 0) {
-					tempo = eventos->getEvento(i)->getTempo();
-					pista = (Pista *) eventos->getEvento(i)->getElemento();
-					semaforo = semaforoDaPista(pista);
-					tempo += pista->getTempoPercorrer();
-					if (tempo <= tempoExecucao) {
-						evento = new Evento(tempo, 1, semaforo);
-						eventos->adicionaEmOrdem(evento);
-					}
+			for (int i = 0; i < nroEventosPrincipal; i++) {
+				tempo = eventos->getEvento(i)->getTempo();
+				pista = (Pista *) eventos->getEvento(i)->getElemento();
+				semaforo = semaforoDaPista(pista);
+				tempo += pista->getTempoPercorrer();
+				if (tempo <= tempoExecucao) {
+					evento = new Evento(tempo, 1, semaforo);
+					tmpEventos->adicionaEmOrdem(evento);
 				}
 			}
+
+			for (int j = 0; j < tmpEventos->getTamanho(); j++)
+				eventos->adicionaEmOrdem(tmpEventos->getEvento(j));
 		}
 
 		void eventosMudancaSemaforo() {
