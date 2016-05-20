@@ -2,7 +2,6 @@ __to-do__
 - como sinais deveriam ficar abertos?
 - verificar se precisa eu crie um método que só chama a classe o da classe pai
 - destrutores e tirar memoryleaks
-- olhar critério de avaliação do grupo1 para ver o que pode ser melhorado
 - wesley?
     - print por toda a parte
     - documentação supimpa
