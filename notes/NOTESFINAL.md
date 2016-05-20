@@ -1,6 +1,5 @@
 __to-do__
 - como sinais deveriam ficar abertos?
-- verificar se precisa que o evento segure dois elementos
 - verificar se precisa eu crie um método que só chama a classe o da classe pai
 - destrutores e tirar memoryleaks
 - precisa do if na linha 144 eventosChegadaSemaforo

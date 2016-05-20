@@ -56,15 +56,6 @@ class Regente {
 			Semaforo *ss2norte = new Semaforo(false, tempoSemaforo, prob1, s2norte, pistaSaida6);
 			Semaforo *sc1leste = new Semaforo(false, tempoSemaforo, prob1, c1leste, pistaSaida7);
 
-			// n1sul->setSemaforoDaPista(sn1sul);
-			// c1oeste->setSemaforoDaPista(sc1oeste);
-			// s1norte->setSemaforoDaPista(ss1norte);
-			// o1leste->setSemaforoDaPista(so1leste);
-			// n2sul->setSemaforoDaPista(sn2sul);
-			// l1oeste->setSemaforoDaPista(sl1oeste);
-			// s2norte->setSemaforoDaPista(ss2norte);
-			// c1leste->setSemaforoDaPista(sc1leste);
-
 			pistas->adiciona(o1oeste);
 			pistas->adiciona(o1leste);
 			pistas->adiciona(c1oeste);
@@ -106,7 +97,7 @@ class Regente {
 					while(tempo < tempoExecucao) {
 						tempo = pista->proximaCriacaoCarro(tempo);
 						if (tempo <= tempoExecucao) {
-							evento = new Evento(tempo, 0, pista, 0);
+							evento = new Evento(tempo, 0, pista);
                     		eventos->adicionaEmOrdem(evento);
 						}
 					}
@@ -134,16 +125,16 @@ class Regente {
 			Evento *evento;
 			Semaforo *semaforo;
 			int tempo;
-
 			int nroEventos = eventos->getTamanho();
+
 			for (int i = 0; i < nroEventos; i++) {
 				if (eventos->getEvento(i)->getTipo() == 0) {
 					tempo = eventos->getEvento(i)->getTempo();
-					pista = (Pista *) eventos->getEvento(i)->getElementoPrincipal();
+					pista = (Pista *) eventos->getEvento(i)->getElemento();
 					semaforo = semaforoDaPista(pista);
 					tempo += pista->getTempoPercorrer();
 					if (tempo <= tempoExecucao) {
-						evento = new Evento(tempo, 1, semaforo, 0);
+						evento = new Evento(tempo, 1, semaforo);
 						eventos->adicionaEmOrdem(evento);
 					}
 				}
@@ -157,6 +148,7 @@ class Regente {
 			Evento *proxEvento;
 			Cruzamento *tmpCruzamento;
 			int tempo;
+
 			for (int i = 0; i < cruzamentos->getMaxLista(); i++) {
 				tmpCruzamento = cruzamentos->getDados()[i];
 				for (int j = 0; j < tmpCruzamento->getSize(); j++) {
@@ -171,8 +163,8 @@ class Regente {
 
 						tempo = semaforo->proximaTrocaSinal(tempo);
 						if (tempo <= tempoExecucao) {
-							evento = new Evento(tempo, 2, semaforo, 0);
-							proxEvento = new Evento(tempo, 2, proxSem, 0);
+							evento = new Evento(tempo, 2, semaforo);
+							proxEvento = new Evento(tempo, 2, proxSem);
 							eventos->adicionaEmOrdem(evento);
 							eventos->adicionaEmOrdem(proxEvento);
 						}
@@ -183,7 +175,7 @@ class Regente {
 
 		void eventosCarroNoSemaforo(Evento *tmpEvento) {
 			Evento *evento;
-			Semaforo *semaforo = (Semaforo *) tmpEvento->getElementoPrincipal();
+			Semaforo *semaforo = (Semaforo *) tmpEvento->getElemento();
 			int tempo = tmpEvento->getTempo();
 			Pista *pistaDestino = semaforo->defineDestino();
 			bool conseguiu = semaforo->trocaDePista(pistaDestino);
@@ -192,18 +184,18 @@ class Regente {
 				if (conseguiu) {
 					tempo += pistaDestino->getTempoPercorrer();
 					if (pistaDestino->getSumidouro()) {
-						evento = new Evento(tempo, 3, pistaDestino, 0);
+						evento = new Evento(tempo, 3, pistaDestino);
 					} else {
 						semaforo = semaforoDaPista(pistaDestino);
-						evento = new Evento(tempo, 1, semaforo, 0);
+						evento = new Evento(tempo, 1, semaforo);
 					}
 				} else {
 					tempo += 1;
-					evento = new Evento(tempo, 1, semaforo, 0);
+					evento = new Evento(tempo, 1, semaforo);
 				}
 			} else {
 				tempo = semaforo->proximaTrocaSinal(tempo);
-				evento = new Evento(tempo, 1, semaforo, 0);
+				evento = new Evento(tempo, 1, semaforo);
 			}
 
 			eventos->adicionaEmOrdem(evento);
@@ -217,8 +209,8 @@ class Regente {
 				if (tempo > tempoExecucao)
  					break;
 
-				Pista *pista = (Pista *) evento->getElementoPrincipal();
-				Semaforo *semaforo = (Semaforo *) evento->getElementoPrincipal();
+				Pista *pista = (Pista *) evento->getElemento();
+				Semaforo *semaforo = (Semaforo *) evento->getElemento();
 
 				switch (evento->getTipo()) {
 					case 0: // add carro
@@ -234,7 +226,7 @@ class Regente {
 						tempo = evento->getTempo();
 						break;
 					case 3: // retira carro
-						pista->retiraCarro(1); //!< 0 ou 1?
+						pista->retiraCarro(1);
 						tempo = evento->getTempo();
 						break;
 					default:
