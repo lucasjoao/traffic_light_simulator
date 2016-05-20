@@ -134,6 +134,7 @@ class Regente {
 			Evento *evento;
 			Semaforo *semaforo;
 			int tempo;
+
 			int nroEventos = eventos->getTamanho();
 			for (int i = 0; i < nroEventos; i++) {
 				if (eventos->getEvento(i)->getTipo() == 0) {
@@ -142,7 +143,7 @@ class Regente {
 					semaforo = semaforoDaPista(pista);
 					tempo += pista->getTempoPercorrer();
 					if (tempo <= tempoExecucao) {
-						evento = new Evento(tempo, 1, 0, semaforo);
+						evento = new Evento(tempo, 1, semaforo, 0);
 						eventos->adicionaEmOrdem(evento);
 					}
 				}
@@ -180,10 +181,9 @@ class Regente {
 			}
 		}
 
-		// pode ter problema nessa lógica, revisar ++
 		void eventosCarroNoSemaforo(Evento *tmpEvento) {
 			Evento *evento;
-			Semaforo *semaforo = (Semaforo *) tmpEvento->getElementoSecundario();
+			Semaforo *semaforo = (Semaforo *) tmpEvento->getElementoPrincipal();
 			int tempo = tmpEvento->getTempo();
 			Pista *pistaDestino = semaforo->defineDestino();
 			bool conseguiu = semaforo->trocaDePista(pistaDestino);
@@ -191,23 +191,24 @@ class Regente {
 			if (semaforo->getStatusAberto()) {
 				if (conseguiu) {
 					tempo += pistaDestino->getTempoPercorrer();
-					if (pistaDestino->getSumidouro())
+					if (pistaDestino->getSumidouro()) {
 						evento = new Evento(tempo, 3, pistaDestino, 0);
-					else
-						evento = new Evento(tempo, 1, 0, 0);
+					} else {
+						semaforo = semaforoDaPista(pistaDestino);
+						evento = new Evento(tempo, 1, semaforo, 0);
+					}
 				} else {
 					tempo += 1;
-					evento = new Evento(tempo, 1, 0, 0);
+					evento = new Evento(tempo, 1, semaforo, 0);
 				}
 			} else {
 				tempo = semaforo->proximaTrocaSinal(tempo);
-				evento = new Evento(tempo, 1, 0, 0);
+				evento = new Evento(tempo, 1, semaforo, 0);
 			}
 
 			eventos->adicionaEmOrdem(evento);
 		}
 
-		// pode ter problema nessa lógica, revisar! Quais devem ser executados primeiro?
 		void executorDeEventos() {
  			int tempo = 0;
  			for(int i = 0; i < eventos->getTamanho(); i++) {
@@ -233,7 +234,7 @@ class Regente {
 						tempo = evento->getTempo();
 						break;
 					case 3: // retira carro
-						pista->retiraCarro(0); //!< 0 ou 1?
+						pista->retiraCarro(1); //!< 0 ou 1?
 						tempo = evento->getTempo();
 						break;
 					default:
@@ -243,8 +244,8 @@ class Regente {
 		}
 
 		void terminaTrabalho() {
-			int entraram;
-			int sairam;
+			int entraram = 0;
+			int sairam = 0;
 			Pista *pista;
 
 			for(int i = 0; i < pistas->getMaxLista(); i++) {

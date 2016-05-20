@@ -1,7 +1,5 @@
 __to-do__
-- fazer funcionar
-- revisar lógica dos métodos anotados
-- fazer funcionar direito
+- como sinais deveriam ficar abertos?
 - verificar se precisa que o evento segure dois elementos
 - verificar se precisa eu crie um método que só chama a classe o da classe pai
 - print por toda a parte
