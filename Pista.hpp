@@ -5,8 +5,10 @@
 #include "estruturas/Lista.hpp"
 #include "Carro.hpp"
 
-class Pista : Fila<Carro*> {
+class Pista : private Fila<Carro*> {
 	public:
+		Pista() {}
+
 		Pista(int vel, int tam, int freq, int varFreq) :       									Fila<Carro*>::Fila<Carro*>(tam) {
 			velocidade = vel;
 			tamanho = tam;
@@ -26,6 +28,8 @@ class Pista : Fila<Carro*> {
 					sumidouro = true;
 			}
 		}
+
+		virtual ~Pista() {}
 
 		void adicionaCarro(Carro *carro) {
 			int tamCar = carro->getTamanho();

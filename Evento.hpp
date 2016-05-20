@@ -3,6 +3,8 @@
 
 class Evento {
     public:
+        Evento() {}
+
         Evento(int tempo, int tipo, void *elemento) {
             _tempo = tempo;
             _tipo = tipo;

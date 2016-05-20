@@ -5,6 +5,8 @@
 
 class Semaforo {
 	public:
+		Semaforo() {}
+
 		Semaforo(bool sts, int tmp, int *prob, Pista *pista, Pista *pistas[]) {
 			_status = sts;
 			tempoAberto = tmp;
@@ -14,6 +16,8 @@ class Semaforo {
 			for (int i = 0; i < 3; i++)
 				_pistaSaida[i] = pistas[i];
 		}
+
+		~Semaforo() {}
 
 		void mudaEstado() {
 			_status = !_status;

@@ -8,9 +8,13 @@ class Relogio : public ListaEnc<Evento*> {
 	public:
 		Relogio() {}
 
-		// void adicionaEmOrdem(Evento *evento) {
-		// 	ListaEnc<Evento*>::adicionaEmOrdem(evento);
-		// }
+		virtual ~Relogio() {
+			ListaEnc<Evento*>::destroiLista();
+		}
+
+		void adicionaEmOrdem(Evento *evento) {
+			ListaEnc<Evento*>::adicionaEmOrdem(evento);
+		}
 
 		bool maior(Evento *evento0, Evento *evento1) {
 			return evento0->getTempo() > evento1->getTempo();

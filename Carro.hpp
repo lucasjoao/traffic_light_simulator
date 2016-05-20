@@ -8,6 +8,8 @@ class Carro {
             chanceDeVirar = calculaProbDeVirar() + 1 ;
         }
 
+        ~Carro() {}
+
         int calculaTam() {
             return (int) (rand() % 5) + 2;
         }

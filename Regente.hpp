@@ -8,12 +8,37 @@
 
 class Regente {
 	public:
+		Regente() {}
+
 		Regente(int tE, int tS) {
 			tempoExecucao = tE;
 			tempoSemaforo = tS;
 			pistas = new Lista<Pista*>(14);
 			cruzamentos = new Lista<Cruzamento*>(2);
 			eventos = new Relogio();
+		}
+
+		~Regente() {
+			destroiRegente();
+		}
+
+		void destroiRegente() {
+			for (int i = 0; i < eventos->getTamanho(); i++)
+				delete eventos->getEvento(i);
+
+			for (int j = 0; j < cruzamentos->getMaxLista(); j++) {
+				for (int k = 0; k < cruzamentos->getDados()[j]->getSize(); k++)
+					delete cruzamentos->getDados()[j]->getSem(k);
+
+				delete cruzamentos->getDados()[j];
+			}
+
+			for (int l = 0; l < pistas->getMaxLista(); l++)
+				delete pistas->getDados()[l];
+
+			delete eventos;
+			delete cruzamentos;
+			delete pistas;
 		}
 
 		void start() {

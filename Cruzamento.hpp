@@ -5,9 +5,13 @@
 #include "estruturas/Lista.hpp"
 #include "Semaforo.hpp"
 
-class Cruzamento : ListaCirc<Semaforo*> {
+class Cruzamento : private ListaCirc<Semaforo*> {
 	public:
 		Cruzamento() {}
+
+		~Cruzamento() {
+			ListaCirc<Semaforo*>::destroiLista();
+		}
 
 		void adiciona(Semaforo *semaforo) {
 			ListaCirc<Semaforo*>::adiciona(semaforo);

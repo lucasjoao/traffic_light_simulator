@@ -1,8 +1,9 @@
 __to-do__
-- como sinais deveriam ficar abertos?
-- verificar se precisa eu crie um método que só chama a classe o da classe pai
-- destrutores e tirar memoryleaks
-- print por toda a parte com operador ternário
+- alocação dinâmica
+    - deletar carros
+    - main (?)
+    - checar valgrind
+- print por toda a parte com operador ternário (?)
 - wesley?
     - documentação supimpa
         - documentar lista encadeada
