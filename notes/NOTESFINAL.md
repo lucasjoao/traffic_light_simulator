@@ -2,11 +2,12 @@ __to-do__
 - como sinais deveriam ficar abertos?
 - verificar se precisa que o evento segure dois elementos
 - verificar se precisa eu crie um método que só chama a classe o da classe pai
-- print por toda a parte
 - destrutores e tirar memoryleaks
 - precisa do if na linha 144 eventosChegadaSemaforo
 - olhar critério de avaliação do grupo1 para ver o que pode ser melhorado
-- documentação supimpa
-    - documentar lista encadeada
+- wesley?
+    - print por toda a parte
+    - documentação supimpa
+        - documentar lista encadeada
 - fazer um leia-me com algo e com tag de compilação ou makefile
 - testar em distros diferentes
