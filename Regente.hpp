@@ -10,9 +10,10 @@ class Regente {
 	public:
 		Regente() {}
 
-		Regente(int tE, int tS) {
-			tempoExecucao = tE;
-			tempoSemaforo = tS;
+		Regente(int tempoExecucao, int tempoSemaforo, int vaiTerPrint) {
+			_tempoExecucao = tempoExecucao;
+			_tempoSemaforo = tempoSemaforo;
+			_vaiTerPrint = vaiTerPrint;
 			pistas = new Lista<Pista*>(14);
 			cruzamentos = new Lista<Cruzamento*>(2);
 			eventos = new Relogio();
@@ -83,14 +84,14 @@ class Regente {
 			Pista *pistaSaida6[3] = {l1leste, s2sul, c1oeste};
 			Pista *pistaSaida7[3] = {l1leste, n2norte, s2sul};
 
-			Semaforo *sn1sul = new Semaforo(true, tempoSemaforo, prob0, n1sul, pistaSaida0);
-			Semaforo *sc1oeste = new Semaforo(false, tempoSemaforo, prob1, c1oeste, pistaSaida1);
-			Semaforo *ss1norte = new Semaforo(false, tempoSemaforo, prob0, s1norte, pistaSaida2);
-			Semaforo *so1leste = new Semaforo(false, tempoSemaforo, prob0, o1leste, pistaSaida3);
-			Semaforo *sn2sul = new Semaforo(true, tempoSemaforo, prob1, n2sul, pistaSaida4);
-			Semaforo *sl1oeste = new Semaforo(false, tempoSemaforo, prob1, l1oeste, pistaSaida5);
-			Semaforo *ss2norte = new Semaforo(false, tempoSemaforo, prob1, s2norte, pistaSaida6);
-			Semaforo *sc1leste = new Semaforo(false, tempoSemaforo, prob1, c1leste, pistaSaida7);
+			Semaforo *sn1sul = new Semaforo(true, _tempoSemaforo, prob0, n1sul, pistaSaida0);
+			Semaforo *sc1oeste = new Semaforo(false, _tempoSemaforo, prob1, c1oeste, pistaSaida1);
+			Semaforo *ss1norte = new Semaforo(false, _tempoSemaforo, prob0, s1norte, pistaSaida2);
+			Semaforo *so1leste = new Semaforo(false, _tempoSemaforo, prob0, o1leste, pistaSaida3);
+			Semaforo *sn2sul = new Semaforo(true, _tempoSemaforo, prob1, n2sul, pistaSaida4);
+			Semaforo *sl1oeste = new Semaforo(false, _tempoSemaforo, prob1, l1oeste, pistaSaida5);
+			Semaforo *ss2norte = new Semaforo(false, _tempoSemaforo, prob1, s2norte, pistaSaida6);
+			Semaforo *sc1leste = new Semaforo(false, _tempoSemaforo, prob1, c1leste, pistaSaida7);
 
 			pistas->adiciona(o1oeste);
 			pistas->adiciona(o1leste);
@@ -130,9 +131,9 @@ class Regente {
 				pista = pistas->getDados()[i];
 				if (pista->getFonte()) {
 					tempo = 0;
-					while(tempo < tempoExecucao) {
+					while(tempo < _tempoExecucao) {
 						tempo = pista->proximaCriacaoCarro(tempo);
-						if (tempo <= tempoExecucao) {
+						if (tempo <= _tempoExecucao) {
 							evento = new Evento(tempo, 0, pista);
                     		eventos->adicionaEmOrdem(evento);
 						}
@@ -169,7 +170,7 @@ class Regente {
 				pista = (Pista *) eventos->getEvento(i)->getElemento();
 				semaforo = semaforoDaPista(pista);
 				tempo += pista->getTempoPercorrer();
-				if (tempo <= tempoExecucao) {
+				if (tempo <= _tempoExecucao) {
 					evento = new Evento(tempo, 1, semaforo);
 					tmpEventos->adicionaEmOrdem(evento);
 				}
@@ -191,7 +192,7 @@ class Regente {
 				tmpCruzamento = cruzamentos->getDados()[i];
 				for (int j = 0; j < tmpCruzamento->getSize(); j++) {
 					tempo = 0;
-					while (tempo <= tempoExecucao) {
+					while (tempo <= _tempoExecucao) {
 						semaforo = (Semaforo *) tmpCruzamento->getSem(j);
 
 						if (j == 3)
@@ -200,7 +201,7 @@ class Regente {
 							proxSem = (Semaforo *) tmpCruzamento->getSem(j+1);
 
 						tempo = semaforo->proximaTrocaSinal(tempo);
-						if (tempo <= tempoExecucao) {
+						if (tempo <= _tempoExecucao) {
 							evento = new Evento(tempo, 2, semaforo);
 							proxEvento = new Evento(tempo, 2, proxSem);
 							eventos->adicionaEmOrdem(evento);
@@ -227,13 +228,16 @@ class Regente {
 						semaforo = semaforoDaPista(pistaDestino);
 						evento = new Evento(tempo, 1, semaforo);
 					}
+					printa(_vaiTerPrint, 4, tmpEvento->getTempo());
 				} else {
 					tempo += 1;
 					evento = new Evento(tempo, 1, semaforo);
+					printa(_vaiTerPrint, 5, tmpEvento->getTempo());
 				}
 			} else {
 				tempo = semaforo->proximaTrocaSinal(tempo);
 				evento = new Evento(tempo, 1, semaforo);
+				printa(_vaiTerPrint, 6, tmpEvento->getTempo());
 			}
 
 			eventos->adicionaEmOrdem(evento);
@@ -244,7 +248,7 @@ class Regente {
  			for(int i = 0; i < eventos->getTamanho(); i++) {
  				Evento *evento = eventos->getEvento(i);
 
-				if (tempo > tempoExecucao)
+				if (tempo > _tempoExecucao)
  					break;
 
 				Pista *pista = (Pista *) evento->getElemento();
@@ -268,8 +272,10 @@ class Regente {
 						tempo = evento->getTempo();
 						break;
 					default:
-						std::cout << "problema no código! \n";
+						std::cout << "Problema no código! \n";
 				}
+
+				printa(_vaiTerPrint, evento->getTipo(), evento->getTempo());
 			}
 		}
 
@@ -288,16 +294,47 @@ class Regente {
 					sairam += pista->getCarrosSairam();
 			}
 
+			std::cout << "-------------------------------------------------\n";
+			std::cout << "RESULTADO:\n";
 			std::cout << entraram << " carros entraram em nossa simulação. \n";
 			std::cout << sairam << " carros saíram em nossa simulação. \n";
+		}
+
+		void printa(int vaiTerPrint, int tipo, int tempo) {
+			if (vaiTerPrint) {
+				switch (tipo) {
+					case 0:
+						std::cout << "Carro chegou em uma pista fonte aos "		  << tempo << " segundos. \n";
+						break;
+					case 1:
+						break;
+					case 2:
+						break;
+					case 3:
+						std::cout << "Carro saiu de uma pista sumidoruo aos "	   << tempo << " segundos. \n";
+						break;
+					case 4:
+						std::cout << "Carro mudou a pista após um semáforo aos"	     << " " << tempo << " segundos. \n";
+						break;
+					case 5:
+						std::cout << "Carro não conseguiu mudar de pista após"      << " um semáforo aos "  << tempo             	   << " segundos. \n";
+						break;
+					case 6:
+						std::cout << "Carro encontrou um semáforo fechado aos "      << tempo << " segundos. \n";
+						break;
+					default:
+						std::cout << "Problema no código! \n";
+				}
+			}
 		}
 
 	private:
 		Lista<Pista*> *pistas;
 		Lista<Cruzamento*> *cruzamentos;
 		Relogio *eventos;
-		int tempoExecucao;
-		int tempoSemaforo;
+		int _tempoExecucao;
+		int _tempoSemaforo;
+		int _vaiTerPrint;
 };
 
 #endif
