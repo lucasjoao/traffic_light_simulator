@@ -20,7 +20,7 @@ int main() {
 	regente->eventosMudancaSemaforo();
 	regente->executorDeEventos();
 	regente->terminaTrabalho();
-	// delete regente;
+	delete regente;
 
 	return 0;
 }

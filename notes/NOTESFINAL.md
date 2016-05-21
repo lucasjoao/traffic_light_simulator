@@ -1,7 +1,6 @@
 __to-do__
 - alocação dinâmica
     - deletar carros
-    - main (?)
     - checar valgrind
 - print por toda a parte com operador ternário (?)
 - wesley?
