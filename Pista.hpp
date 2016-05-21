@@ -44,8 +44,10 @@ class Pista : private Fila<Carro*> {
 			Carro *carro = Fila<Carro*>::retira();
 			int tamCar = carro->getTamanho();
 			espacoLivre += tamCar;
-			if (tipo == 1)
+			if (tipo == 1) {
 				carrosSairam += 1;
+				delete carro;
+			}
 		}
 
 		int proximaCriacaoCarro(int tempo) {
@@ -58,8 +60,16 @@ class Pista : private Fila<Carro*> {
 			return Fila<Carro*>::getDados()[0];
 		}
 
+		Carro *getCarro(int pos) {
+			return Fila<Carro*>::getDados()[pos];
+		}
+
 		bool pistaCheia() {
 			return Fila<Carro*>::filaCheia();
+		}
+
+		bool pistaVazia() {
+			return Fila<Carro*>::filaVazia();
 		}
 
 		int getTempoPercorrer() {
@@ -80,6 +90,10 @@ class Pista : private Fila<Carro*> {
 
 		bool getSumidouro() {
 			return sumidouro;
+		}
+
+		int getTamanho() {
+			return Fila<Carro*>::getUltimo();
 		}
 
 	private:

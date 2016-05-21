@@ -19,7 +19,18 @@ class Regente {
 		}
 
 		~Regente() {
+			destroiCarros();
 			destroiRegente();
+		}
+
+		void destroiCarros() {
+			for (int i = 0; i < pistas->getMaxLista(); i++) {
+				Pista *tmpPista = pistas->getDados()[i];
+				if (!tmpPista->pistaVazia()) {
+					for (int j = 0; j < tmpPista->getTamanho(); j++)
+						delete tmpPista->getCarro(j);
+				}
+			}
 		}
 
 		void destroiRegente() {
