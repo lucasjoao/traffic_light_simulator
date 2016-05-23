@@ -5,11 +5,30 @@
 #include "Pista.hpp"
 #include "Relogio.hpp"
 #include "Cruzamento.hpp"
-
+/**
+*@brief    Implementação da classe Regente;
+*
+*@details
+*@param    *pistas       		Ponteiro para uma lista de vetor de Pistas.
+*@param    *cruzamentos	 		Ponteiro para uma lista de vetor de Cruzamentos.
+*@param    *eventos 	 		Ponteiro para um Relogio, que é uma lista encadeada de Eventos.
+*@param    _vaiTerPrint			Inteiro que indica se haverão prints de andamento da execução ou não.
+*@param    _tempoExecucao		Inteiro que recebe o tempo de execução total da simulação.
+*@param    _tempoSemaforo   	Inteiro que recebe o tempo em que um semáforo deve permanecer aberto no sistema.
+**/
 class Regente {
 	public:
 		Regente() {}
-
+/*
+ *Construtor com parâmetros, com inicialização de tempoExecucao, tempoSemaforo, pistas, cruzamentos e eventos
+ @params     tE, tS
+ *O atributo tempoExecucao é inicializado com o int tE recebido do argumento do método construtor.
+ *O atributo tempoSemaforo é inicializado com o int tS recebido do argumento do método construtor.
+ *O atributo pistas é inicializado com uma nova instanciação de lista de vetor de pistas com 14 pistas.
+ *O atributo vai ter print é inicializado com o inteiro vaiTerPrint recebido no arguemento do método construtor.
+ *O atributo cruzamentos é inicializado com uma nova instanciação de lista de vetor de cruzamentos com 2 cruzamentos.
+ *O atributo eventos é inicializado com uma nova instanciação da classe Relogio.
+*/
 		Regente(int tempoExecucao, int tempoSemaforo, int vaiTerPrint) {
 			_tempoExecucao = tempoExecucao;
 			_tempoSemaforo = tempoSemaforo;
@@ -18,12 +37,17 @@ class Regente {
 			cruzamentos = new Lista<Cruzamento*>(2);
 			eventos = new Relogio();
 		}
-
+/*
+*Destrutor sem parâmetros, são chamados os métodos destroiCarros(), e destroiRegente().
+*/
 		~Regente() {
 			destroiCarros();
 			destroiRegente();
 		}
-
+/*
+*@brief Método responsável por destruir os carros criados.
+*@details Para cada pista que não esteja vazia, todos os carros são deletados.
+*/
 		void destroiCarros() {
 			for (int i = 0; i < pistas->getMaxLista(); i++) {
 				Pista *tmpPista = pistas->getDados()[i];
@@ -33,7 +57,12 @@ class Regente {
 				}
 			}
 		}
-
+/*
+*@brief Método responsável por deletar os eventos, cruzamentos e pistas.
+*Ou seja, deleta os principais componentes do sistema regente de modo geral.
+*@details Para cada evento, para cada cruzamento, para cada pista, são deletados
+*os eventos, os cruzamentos e as pistas respectivamente.
+*/
 		void destroiRegente() {
 			for (int i = 0; i < eventos->getTamanho(); i++)
 				delete eventos->getEvento(i);
@@ -52,7 +81,10 @@ class Regente {
 			delete cruzamentos;
 			delete pistas;
 		}
-
+/*
+*@brief    Instancia/cria as estruturas do sistema.
+*@details  São criadas estruturas tais como as pistas, semáforos.
+*/
 		void start() {
 			Pista *o1oeste = new Pista(80, 2000, 0, 0);
 			Pista *o1leste = new Pista(80, 2000, 10, 2);
@@ -121,7 +153,12 @@ class Regente {
 			cruzamentos->adiciona(c1);
 			cruzamentos->adiciona(c2);
 		}
-
+/*
+*@brief    Método que gera os eventos respectivos a criação de carros
+*@details  Para cada pista, enquanto o tempo for menor que o tempo
+*de execução do sistema, serão criados eventos do tipo 0, que correspondem
+*ao tipo de criação de carros em um determinado tempo.
+*/
 		void eventosCriarCarro() {
 			Pista *pista;
     		Evento *evento;
@@ -141,7 +178,11 @@ class Regente {
 				}
 			}
 		}
-
+/*
+*@brief Busca o semáforo correto da pista.
+*@param Ponteiro para uma pista que deseja se buscar o semaforo da pista que é aferente.
+*@return Retorna o semáforo desejado.
+*/
 		Semaforo *semaforoDaPista(Pista *pista) {
 			Semaforo *semaforo;
 			Cruzamento *tmpCruzamento;
@@ -156,7 +197,11 @@ class Regente {
 
 			return nullptr;
 		}
-
+/*
+*@brief    Método que gera os eventos respectivos a chegada no semáforo
+*@details  Para cada evento já adicionado, é verificado se o evento é de
+*um tipo específico, então são criados eventos de chegada ao semáforo.
+*/
 		void eventosChegadaSemaforo() {
 			Pista *pista;
 			Evento *evento;
@@ -179,7 +224,12 @@ class Regente {
 			for (int j = 0; j < tmpEventos->getTamanho(); j++)
 				eventos->adicionaEmOrdem(tmpEventos->getEvento(j));
 		}
-
+/*
+*@brief    Método que gera os eventos respectivos a mudança de semáforo.
+*@details  Enquanto o tempo de execução for válido, são criados dois eventos
+*de troca de sinal, em que um se fecha para o seguinte abrir respectivamente.
+*De modo que um semáforo de cada cruzamento fica aberto por vez.
+*/
 		void eventosMudancaSemaforo() {
 			Semaforo *semaforo;
 			Semaforo *proxSem;
@@ -211,7 +261,13 @@ class Regente {
 				}
 			}
 		}
-
+/*
+*@brief    Método que gera os eventos respectivos a abertura do sinal
+*@details  Se o semáforo encontra-se aberto, e foi possivel trocar de pista,
+*é criado novo evento de chegada ao sumidouro ou a uma pista comum, caso não seja
+*possível trocar de pista, tenta-se novamente. Caso o semáforo esteja fechado,
+*espera-se a próxima troca de sinal.
+*/
 		void eventosCarroNoSemaforo(Evento *tmpEvento) {
 			Evento *evento;
 			Semaforo *semaforo = (Semaforo *) tmpEvento->getElemento();
@@ -242,7 +298,11 @@ class Regente {
 
 			eventos->adicionaEmOrdem(evento);
 		}
-
+/*
+*@brief    Método responsável por executar todos os tipos de eventos do sistema.
+*@details  Para cada evento no sistema, enquanto o tempo de execução pré-estabelecido
+*for válido, conforme o tipo do evento (0,1,2,3), estes serão executados.
+*/
 		void executorDeEventos() {
  			int tempo = 0;
  			for(int i = 0; i < eventos->getTamanho(); i++) {
@@ -278,7 +338,13 @@ class Regente {
 				printa(_vaiTerPrint, evento->getTipo(), evento->getTempo());
 			}
 		}
-
+/*
+*@brief    Método que termina a execução do programa, retornando as saídas.
+*@details  Para cada pista conforme fonte ou sumidouro, são recolhidos seus
+*valores de carros que entraram e/ou sairam, para serem armazenados em
+*variáveis que servirão de saída para o usuário verificar os resultados
+*de toda a simulação de tráfego.
+*/
 		void terminaTrabalho() {
 			int entraram = 0;
 			int sairam = 0;
@@ -299,7 +365,11 @@ class Regente {
 			std::cout << entraram << " carros entraram em nossa simulação. \n";
 			std::cout << sairam << " carros saíram em nossa simulação. \n";
 		}
-
+/*
+*@brief Método responsável por printar as mensagens dos acontecimentos do sistema.
+*@param Inteiro que indica se tais prints devem ser mostrados ou não, e inteiro que
+*corresponde ao tempo de cada evento a ser printado.
+*/
 		void printa(int vaiTerPrint, int tipo, int tempo) {
 			if (vaiTerPrint) {
 				switch (tipo) {
