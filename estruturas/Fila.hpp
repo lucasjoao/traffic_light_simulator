@@ -34,6 +34,11 @@ class Fila {
 			dados = new T[tam];
 		}
 
+		/*!
+		 *  \brief Destrutor
+		 *
+		 *	Deleta o vetor alocado dinamicamente na memoria.
+		 */
 		~Fila() {
 			delete[] dados;
 		}
@@ -146,6 +151,12 @@ class Fila {
 			numeroUltimo = -1;
 		}
 
+		/*!
+		 *  \brief Funcao getDados
+		 *	\return o ponteiro do tipo generico de dados
+		 *
+		 *	Funcao getter
+		 */
 		T *getDados() {
 			return dados;
 		}
