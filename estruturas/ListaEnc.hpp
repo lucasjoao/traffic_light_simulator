@@ -134,6 +134,25 @@ class ListaEnc {
 			}
 		}
 
+		/**
+		 *  Funcao adicionaEmOrdem
+		 *  Se a lista estiver vazia, entao chama a funcao adicionaNoInicio
+		 * 		para realizar o processo de adicao do dado recebido como
+		 *		argumento. Caso contrario, entao caminha por todos vertices da
+		 *		estrutura e para cada um deles compara se a informacao do
+		 *		vertice e maior do que o dado passado como argumento atraves
+		 *		da funcao maior, e, tambem verifica se o proximo vertice
+		 *		existe. Se alguma dessas possibilidade forem verdadeiras,
+		 *		entao o laco e parado e ira adicionar o dado uma posicao antes
+		 *		de um elemento maior que ele, ou, no fim da lista, caso o dado
+		 *		a ser inserido for maior que todos os outros elementos. O
+		 *	 	processo de adicao fica por conta da funcao adicionaNaPosicao
+		 *		que e chamada por ultimo.
+		 *  Verifica o status da lista atraves da funcao listaVazia.
+		 *	Parametro dado passado por referencia e um tipo generico constante
+		 *		que representa o dado que entrara na lista.
+		 *  Nao possui retorno.
+		 */
 		void adicionaEmOrdem(const T &dado) {
 			if (listaVazia()) {
 				adicionaNoInicio(dado);
