@@ -38,6 +38,11 @@ class Lista {
 			dados = new T[tam];
 		}
 
+		/*!
+		 *  \brief Destrutor
+		 *
+		 *	Deleta o vetor alocado dinamicamente na memoria.
+		 */
 		~Lista() {
 			delete[] dados;
 		}
